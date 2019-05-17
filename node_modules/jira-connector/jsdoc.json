@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": ["."],
+    "exclude": ["./node_modules"],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./docs/",
+    "recurse": true,
+    "readme": "./README.md",
+    "package": "./package.json"
+  },
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "parser": "gfm"
+  }
+}
