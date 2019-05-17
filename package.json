@@ -1,0 +1,33 @@
+{
+  "name": "jira-cli",
+  "version": "1.0.0",
+  "description": "A sample cli tool that shows reports about jira bug count",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junipdewan/jira-cli.git"
+  },
+  "keywords": [
+    "jira-cli",
+    "jira-bug-count",
+    "jira-cmd"
+  ],
+  "author": "Junip Dewan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/junipdewan/jira-cli/issues"
+  },
+  "homepage": "https://github.com/junipdewan/jira-cli#readme",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.3.1",
+    "jira-connector": "^2.10.0"
+  },
+  "dependencies": {}
+}

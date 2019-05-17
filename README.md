@@ -1,3 +1,1 @@
-# cli-jira
-
-CLI -JIRA cmd line toll made in javascript so that it can be used to track jira tickets and can set a brief overview
+ JIRA-CLI tool Work in progress for the BUg tickets count for the better bug tracking
