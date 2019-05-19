@@ -1,1 +1,1 @@
- JIRA-CLI tool Work in progress for the BUg tickets count for the better bug tracking
+JIRA CLI TOOL FOR THE INSTANCE HELP IN BUG COUNT/ TRACKING
