@@ -4,7 +4,7 @@
  *  Chalk - `https://github.com/chalk/chalk`
  *  For terminal styling 
  * 
- *  A wrapper for the Figlet and Chalk to
+ *  A wrapper for the Figlet and Chalk to print awesome inputs
  */
 const chalk = require('chalk');
 const figlet = require('figlet');
