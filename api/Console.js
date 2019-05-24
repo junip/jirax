@@ -15,18 +15,22 @@ module.exports = ConsoleAPI;
  * on call of selected function print the message in the console
  * @param {*} message 
  */
-function ConsoleAPI(message) {
+function ConsoleAPI() {
 
-    this.printRed = function(){
+    this.printRed = function(message){
         console.log(chalk.red(
             figlet.textSync(message, { horizontalLayout: 'full' })
         ));
     }
 
-    this.printYellow = function(){
+    this.printYellow = function(message){
         console.log(chalk.yellow(
             figlet.textSync(message, { horizontalLayout: 'full' })
         ));
+    }
+
+    this.printError = function(message) {
+        console.log(chalk.red.bold(message));
     }
 }
 
