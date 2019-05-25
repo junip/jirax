@@ -1,9 +1,8 @@
 /**
  * Used to connect JIRA issue APIS
  */
-var jiraAuth = require('../lib/Authentication'); 
-var jira = new jiraAuth({});
-const currentUser = jira.authenticate();
+var jiraAuth = require('../lib/Authentication');
+const currentUser = new jiraAuth().currentUser();
 
 module.exports = IssueClient;
 

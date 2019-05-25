@@ -32,6 +32,10 @@ function ConsoleAPI() {
     this.printError = function(message) {
         console.log(chalk.red.bold(message));
     }
+
+    this.printInfo = function(message) {
+        console.log(chalk.green.bold(message));
+    }
 }
 
 

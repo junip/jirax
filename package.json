@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A sample cli tool that shows reports about jira bug count",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./lib/Commands.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
