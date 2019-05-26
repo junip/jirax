@@ -2,7 +2,12 @@
  * Used to connect JIRA issue APIS
  */
 var jiraAuth = require('../lib/Authentication');
+var open = require('open');
+var Configstore = require('configstore');
+
+const jiraconfig = new Configstore('jiraconfig');
 const currentUser = new jiraAuth().currentUser();
+
 
 module.exports = IssueClient;
 
@@ -19,5 +24,14 @@ function IssueClient() {
         });
         
     }
-
+    /**
+     * Opens the issue in the default browser
+     * hostname/browse/issuekey
+     * @issueKey
+     */
+    this.openIssue = function(issueKey) {
+        let hostName = jiraconfig.get('hostname');
+        let URL = `https://${hostName}/browse/${issueKey}`
+        open(URL);
+    }
 }
