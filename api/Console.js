@@ -9,31 +9,25 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-module.exports = ConsoleAPI;
+module.exports = {
 
-/**
- * on call of selected function print the message in the console
- * @param {*} message 
- */
-function ConsoleAPI() {
-
-    this.printRed = function(message){
+    printFigletRed: function(message){
         console.log(chalk.red(
             figlet.textSync(message, { horizontalLayout: 'full' })
         ));
-    }
+    },
 
-    this.printYellow = function(message){
+    printFigletYellow: function(message){
         console.log(chalk.yellow(
             figlet.textSync(message, { horizontalLayout: 'full' })
         ));
-    }
+    },
 
-    this.printError = function(message) {
+    printError: function(message) {
         console.log(chalk.red.bold(message));
-    }
+    },
 
-    this.printInfo = function(message) {
+    printInfo: function(message) {
         console.log(chalk.green.bold(message));
     }
 }
