@@ -4,7 +4,7 @@
   "description": "A sample cli tool that shows reports about jira bug count",
   "main": "index.js",
   "preferGlobal": true,
-  "bin": "./lib/Commands.js",
+  "bin": "./src/Commands.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"src/**/*.{js,jsx}\""
