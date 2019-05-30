@@ -6,7 +6,7 @@ const issue = require("./api/IssueClient");
 const project = require("./api/ProjectClient");
 const tablularPrint = require("./api/PrintDetails");
 
-program.version("1.0.0").description("Cli tool for JIRA");
+program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
 program
   .option("-l, --login", "Login Using JIRA API Token")
