@@ -9,8 +9,7 @@
 
 const jiraConnector = require("jira-connector");
 const encode = require("./Encode");
-const Configstore = require("configstore");
-const jiraconfig = new Configstore("jiraconfig");
+const util = require("./Utils");
 
 module.exports = {
   /**
@@ -48,8 +47,8 @@ module.exports = {
    * store contains the { "hostname", "encodedString"} as keys
    */
   currentUser: function() {
-    let HOST_NAME = jiraconfig.get("hostname");
-    let encodedString64 = jiraconfig.get("encodedString");
+    let HOST_NAME = util.getHostName();
+    let encodedString64 = util.getEncodedString();
 
     if (!HOST_NAME) {
       console.log("Please Loggin using your API Token");

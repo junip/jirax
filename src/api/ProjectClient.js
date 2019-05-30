@@ -2,6 +2,8 @@
  * user's projects related JIRA APIS
  */
 const jira = require("../Authentication");
+const util = require("../Utils");
+const open = require("open");
 
 module.exports = {
   /**
@@ -23,5 +25,14 @@ module.exports = {
       let response = error ? error : success;
       return response;
     });
+  },
+  /**
+   * Open JIRA Rapid Board
+   * @param {*} projectKey
+   */
+  openRapidBoard: function(projectKey) {
+    let baseURL = util.getBaseUrl();
+    let UrlToOpen = `${baseURL}/secure/RapidBoard.jspa?projectKey=${projectKey}`;
+    open(UrlToOpen);
   }
 };
