@@ -15,7 +15,8 @@ program
   .option(
     "-r, --open-board <key>",
     "Open Rapid Board for the Given Project Key"
-  );
+  )
+  .option("--list", "List of To Do issues for the current User");
 
 program.parse(process.argv);
 
@@ -30,4 +31,7 @@ if (program.openIssue) {
 }
 if (program.openBoard) {
   project.openRapidBoard(program.openBoard);
+}
+if(program.list) {
+  issue.fetchMyOpenIssues()
 }

@@ -7,25 +7,60 @@ const consoleApi = require("../api/console");
 const util = require("../utils");
 
 module.exports = {
-
   printInConsole(issue) {
-    console.log(consoleApi.printBgGreenBright("---------------------------------------------------------------------------\n\n"))
+    console.log(
+      consoleApi.printBgGreenBright(
+        "---------------------------------------------------------------------------\n\n"
+      )
+    );
 
-    console.log(`## Summary: ${issue.summary}\n`)                                        
+    console.log(`## Summary: ${issue.summary}\n`);
 
-    console.log(`## ${issue.key}                        Status: ${issue.status}                 ## Assignee - ${issue.assigneeName} \n`)
+    console.log(
+      `## ${issue.key}                        Status: ${
+        issue.status
+      }                    ## Assignee - ${issue.assigneeName} \n`
+    );
 
-    console.log(`## Type: ${issue.issueType}                                             ## Reporter - ${issue.reporterName} \n`)
+    console.log(
+      `## Type: ${
+        issue.issueType
+      }                                                  ## Reporter - ${
+        issue.reporterName
+      } \n`
+    );
 
-    console.log(`## Priority: ${issue.priority}                                           ## Created  - ${util.formatDate(issue.created)} \n`)
+    console.log(
+      `## Priority: ${
+        issue.priority
+      }                                                ## Created  - ${util.formatDate(
+        issue.created
+      )} \n`
+    );
 
-    console.log(`## Environment: ${issue.environment? issue.environment :  "Not Present"}                            ## Updated  -  ${util.formatDate(issue.updated)} \n`)
+    console.log(
+      `## Environment: ${
+        issue.environment ? issue.environment : "Not Present       "
+      }                                 ## Updated  -  ${util.formatDate(
+        issue.updated
+      )} \n`
+    );
 
-    console.log(`## ${consoleApi.printbgBlueBright("Description")}                                                     ## Resolved - ${util.formatDate(issue.resolved)} \n`) 
+    console.log(
+      `## ${consoleApi.printbgBlueBright(
+        "Description"
+      )}                                                     ## Resolved - ${util.formatDate(
+        issue.resolved
+      )} \n`
+    );
 
-    console.log(`${issue.description}\n\n`)
+    console.log(`${issue.description}\n\n`);
 
-    console.log(consoleApi.printBgGreenBright("---------------------------------------------------------------------------\n\n"))
+    console.log(
+      consoleApi.printBgGreenBright(
+        "---------------------------------------------------------------------------\n\n"
+      )
+    );
   },
 
   /**
@@ -49,8 +84,8 @@ module.exports = {
         created: response.fields.created,
         updated: response.fields.updated,
         resolved: response.fields.resolved
-      }
-      module.exports.printInConsole(issueObject)
+      };
+      module.exports.printInConsole(issueObject);
     });
-  }
+  },
 };
