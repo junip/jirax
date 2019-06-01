@@ -1,15 +1,9 @@
-/**
- *  APIS to use the print message in console that uses
- *  Figlet - `https://github.com/cmatsuoka/figlet`
- *  Chalk - `https://github.com/chalk/chalk`
- *  For terminal styling
- *
- *  A wrapper for the Figlet and Chalk to print awesome inputs
- */
+
 const chalk = require("chalk");
 const figlet = require("figlet");
 
 module.exports = {
+
   printFigletRed: function(message) {
     console.log(
       chalk.red(figlet.textSync(message, { horizontalLayout: "full" }))
@@ -28,5 +22,45 @@ module.exports = {
 
   printInfo: function(message) {
     console.log(chalk.green.bold(message));
-  }
+  },
+
+  printBgRed: function(message) {
+    return  chalk.black.bgRed.bold(`${message}`)
+  },
+
+  printBgGreen: function(message) {
+    return  chalk.black.bgGreen.bold(`${message}`)
+  },
+
+  printBgBlue: function(message) {
+    return  chalk.black.bgBlue.bold(`${message}`)
+  },
+
+  printBgYellow: function(message) {
+    return  chalk.black.bgYellow.bold(`${message}`)
+  },
+
+  bgMagenta: function(message) {
+    return  chalk.black.bgMagenta.bold(`${message}`)
+  },
+
+  printBgGreenBright: function(message) {
+    return  chalk.black.bgGreenBright.bold(`${message}`)
+  },
+
+  printbgCyan: function(message) {
+    return  chalk.black.bgCyan.bold(`${message}`)
+  },
+
+  bgMagentaBright: function(message) {
+    return  chalk.black.bgMagentaBright.bold(`${message}`)
+  },
+
+  printBgGreenBright: function(message) {
+    return  chalk.black.bgGreenBright.bold(`${message}`)
+  },
+
+  printbgBlueBright: function(message) {
+    return  chalk.white.bgBlueBright.bold(`${message}`)
+  },
 };

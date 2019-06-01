@@ -1,6 +1,6 @@
 # jira-cli
 
-A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day access with JIRA client.
+A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA client.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ You are required to have [Node.js](https://nodejs.org/) installed to run the app
 
 ## Getting Started
 
-1. Log in to https://id.atlassian.com/manage/api-tokens and        generate your API TOKEN.
+1. Log in to [Atlassian](https://id.atlassian.com/manage/api-tokens) and        generate your API TOKEN.
 2. Copy the API TOKEN
 
 ## Login In Cli
@@ -17,19 +17,18 @@ You are required to have [Node.js](https://nodejs.org/) installed to run the app
 jira-cli --login
 ```
 
-This will prompt few questions.Enter your credentials
+This will prompt few questions to enter your credentials please enter the credentials to use the CLI
 
 ```sh
-? Host Name to use JIRA API 
-? Your Jira User Name 
-? YOUR API TOKEN 
+$ Host Name to use JIRA API 
+$ Your Jira User Name 
+$ YOUR API TOKEN 
 ```
 
 ## Cli help
 ```sh
 jira-cli --help 
 ```
-
 
 ## Contribution
 

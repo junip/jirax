@@ -1,15 +1,14 @@
 /**
  * Authentication Module
- * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * -------------------------------------------------------------
  * return the jiraAuth BASE object and then we can call the apis
  * on the base of the main object.
- *
  */
 // your API Token = WwUjxh5TM2QkGovimPrc2FDB;
 
 const jiraConnector = require("jira-connector");
-const encode = require("./Encode");
-const util = require("./Utils");
+const encode = require("./encode");
+const util = require("./utils");
 
 module.exports = {
   /**
@@ -43,8 +42,7 @@ module.exports = {
     });
   },
   /**
-   * After authentication collect the keys from the configstore
-   * store contains the { "hostname", "encodedString"} as keys
+   * Returns the recently authenticated user JIRA-Connector Object
    */
   currentUser: function() {
     let HOST_NAME = util.getHostName();

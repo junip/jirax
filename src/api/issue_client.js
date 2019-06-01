@@ -1,10 +1,9 @@
 /**
  * Used to connect JIRA issue APIS
  */
-const authenticate = require("../Authentication");
+const authenticate = require("../authentication");
 const open = require("open");
-const Configstore = require("configstore");
-const jiraconfig = new Configstore("jiraconfig");
+const util = require("../utils")
 
 module.exports = {
   /**
@@ -26,7 +25,7 @@ module.exports = {
    * @issueKey
    */
   openIssue: function(issueKey) {
-    let hostName = jiraconfig.get("hostname");
+    let hostName = util.getHostName();
     let URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   }

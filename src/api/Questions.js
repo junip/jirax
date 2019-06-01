@@ -6,9 +6,9 @@ const credentialQuestion = [
   {
     type: "input",
     name: "host_name",
-    message: "Host Name to use JIRA API",
+    message: "Host name to use JIRA (for eg: something.atlassian.com)",
     validate: function(value) {
-      return value.length ? true : "Please Enter Host Name";
+      return value.length ? true : "Please enter Host Name";
     }
   },
   {
@@ -16,7 +16,7 @@ const credentialQuestion = [
     name: "user_name",
     message: "Your Jira User Name",
     validate: function(value) {
-      return value.length ? true : "Please Enter Your JIRA API's";
+      return value.length ? true : "Please enter User Name";
     }
   },
   {

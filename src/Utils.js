@@ -3,6 +3,7 @@
  */
 const Configstore = require("configstore");
 const jiraconfig = new Configstore("jiraconfig");
+const datetimeformat = require('dateformat');
 
 module.exports = {
   getBaseUrl: function() {
@@ -19,5 +20,13 @@ module.exports = {
   getEncodedString: function() {
     let encodedString64 = jiraconfig.get("encodedString");
     return encodedString64;
+  },
+  /**
+   * @returns Date & Time
+   * @format 10/May/19 12:11 PM
+   * @param {*} datetime
+   */
+  formatDate: function(datetime) {
+    return datetimeformat(datetime, "dd/mmmm/yy, h:MM TT")
   }
 };

@@ -1,8 +1,8 @@
 /**
  * user's projects related JIRA APIS
  */
-const jira = require("../Authentication");
-const util = require("../Utils");
+const jira = require("../authentication");
+const util = require("../utils");
 const open = require("open");
 
 module.exports = {

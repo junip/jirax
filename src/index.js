@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
 const program = require("commander");
-const input = require("./SaveInput");
-const issue = require("./api/IssueClient");
-const project = require("./api/ProjectClient");
-const tablularPrint = require("./api/PrintDetails");
+const input = require("./store");
+const issue = require("./api/issue_client");
+const project = require("./api/project_client");
+const tablularPrint = require("./api/print_details");
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
 program
   .option("-l, --login", "Login Using JIRA API Token")
-  .option("-issue, --open-issue <key>", "Open Issue Using KEYS for Given Key")
-  .option("-detail, --issue-detail <key>", "Prints Issue Details for Given Key")
+  .option("--open-issue <key>", "Open Issue Using KEYS for Given Key")
+  .option("--issue-detail <key>", "Prints Issue Details for Given Key")
   .option(
-    "-rapid, --open-board <key>",
+    "-r, --open-board <key>",
     "Open Rapid Board for the Given Project Key"
   );
 
