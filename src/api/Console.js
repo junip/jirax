@@ -14,6 +14,10 @@ module.exports = {
     );
   },
 
+  printKeyColor: function(message) {
+    return chalk.hex("#5e6c84").bold(`${message}`);
+  },
+
   printError: function(message) {
     console.log(chalk.red.bold(message));
   },
@@ -38,24 +42,20 @@ module.exports = {
     return chalk.black.bgYellow.bold(`${message}`);
   },
 
-  bgMagenta: function(message) {
-    return chalk.black.bgMagenta.bold(`${message}`);
+  bgMagentaBright: function(message) {
+    return chalk.white.bgMagentaBright.bold(`${message}`);
+  },
+
+  bgRedBright: function(message) {
+    return chalk.white.bgRedBright.bold(`${message}`);
   },
 
   printBgGreenBright: function(message) {
-    return chalk.black.bgGreenBright.bold(`${message}`);
+    return chalk.hex("#2c3331").bgGreenBright.bold(`${message}`);
   },
 
   printbgCyan: function(message) {
     return chalk.black.bgCyan.bold(`${message}`);
-  },
-
-  bgMagentaBright: function(message) {
-    return chalk.black.bgMagentaBright.bold(`${message}`);
-  },
-
-  printBgGreenBright: function(message) {
-    return chalk.black.bgGreenBright.bold(`${message}`);
   },
 
   printbgBlueBright: function(message) {

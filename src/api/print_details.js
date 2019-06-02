@@ -87,5 +87,5 @@ module.exports = {
       };
       module.exports.printInConsole(issueObject);
     });
-  },
+  }
 };

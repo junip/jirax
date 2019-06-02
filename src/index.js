@@ -32,6 +32,6 @@ if (program.openIssue) {
 if (program.openBoard) {
   project.openRapidBoard(program.openBoard);
 }
-if(program.list) {
-  issue.fetchMyOpenIssues()
+if (program.list) {
+  issue.fetchMyOpenIssues();
 }

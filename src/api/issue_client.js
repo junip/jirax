@@ -4,8 +4,8 @@
 const authenticate = require("../authentication");
 const open = require("open");
 const util = require("../utils");
-const consoleApi = require('../api/console')
-const jqlClient = require('./jql_client')
+const consoleApi = require("../api/console");
+const jqlClient = require("./jql_client");
 
 module.exports = {
   /**
@@ -33,10 +33,12 @@ module.exports = {
   },
 
   fetchMyOpenIssues: function() {
-    jqlClient.myOpenIssues({},function(response){
-      response.map((issue) => {
-        console.log(`${consoleApi.printBgYellow(issue.key)} ${issue.summary} ${consoleApi.printbgBlueBright(issue.type)}\n`)
-      })
-    })
+    jqlClient.myOpenIssues({}, function(response) {
+      response.map(issue => {
+        console.log(
+          `${util.setIssueColor(issue.type)} ${issue.key} ${issue.summary} \n`
+        );
+      });
+    });
   }
 };
