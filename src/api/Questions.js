@@ -16,16 +16,16 @@ const credentialQuestion = [
     name: "user_name",
     message: "Your Jira User Name",
     validate: function(value) {
-      return value.length ? true : "Please enter User Name";
+      return value.length ? true : "Please enter Jira User Name";
     }
   },
   {
     type: "password",
     name: "api_token",
-    message: "YOUR API TOKEN",
+    message: "Your API Token",
     mask: "*",
     validate: function(value) {
-      return value.length ? true : "Please Enter Your JIRA API TOKEN";
+      return value.length ? true : "Please Enter Your API Token";
     }
   }
 ];
