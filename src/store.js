@@ -9,8 +9,8 @@ const print = require("./api/console");
 const chalk = require("chalk");
 const question = require("./api/questions");
 const configStore = new Configstore("jiraconfig");
-const util = require('./utils');
-const spinner = util.spinner(' Authenticating...')
+const util = require("./utils");
+const spinner = util.spinner(" Authenticating...");
 /**
  * Verify the user and save the object
  * @config object
@@ -31,14 +31,14 @@ module.exports = {
   verifyAndSave: function(config) {
     // authenticate and save the inputs in config store
     jira.authenticate(config, function(data) {
-      setTimeout(() => {
+      if (data) {
         spinner.stop();
-        if (data.error) {
-          print.printError("Unauthorized - Please re-enter your credentials");
-        } else {
-          module.exports.storeInfo(data);
-        }
-      }, 1000);
+      }
+      if (data.error) {
+        print.printError("Unauthorized - Please re-enter your credentials");
+      } else {
+        module.exports.storeInfo(data);
+      }
     });
   },
   /**

@@ -31,14 +31,37 @@ module.exports = {
     let URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   },
+  /**
+   * Print the issue listing in a proper format
+   * @param {*} issues
+   */
+  printIssues: function(issues) {
+    if (issues) {
+      issues.map(issue => {
+        console.log(
+          `${issue.key} ${util.setIssueColor(issue.type)} ${issue.summary} \n`
+        );
+      });
+    } else {
+      consoleApi.printInfo("No issues found")
+    }
+  },
 
   fetchMyOpenIssues: function() {
     jqlClient.myOpenIssues({}, function(response) {
-      response.map(issue => {
-        console.log(
-          `${util.setIssueColor(issue.type)} ${issue.key} ${issue.summary} \n`
-        );
-      });
+      module.exports.printIssues(response)
+    });
+  },
+
+  fetchMyInReviewIssues: function() {
+    jqlClient.myInReviewIssues({}, function(response) {
+      module.exports.printIssues(response)
+    });
+  },
+
+  fetchMyCompletedIssues: function() {
+    jqlClient.myCompletedIssues({}, function(response) {
+      module.exports.printIssues(response);
     });
   }
 };

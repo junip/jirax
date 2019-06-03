@@ -5,7 +5,7 @@ const Configstore = require("configstore");
 const jiraconfig = new Configstore("jiraconfig");
 const datetimeformat = require("dateformat");
 const consoleApi = require("./api/console");
-const ora = require('ora');
+const ora = require("ora");
 
 module.exports = {
   getBaseUrl: function() {
@@ -56,22 +56,25 @@ module.exports = {
     }
   },
   /**
-   * returns  the spinner object 
+   * returns  the ora object
    * we can use to start and stop the loader using the object
-   * @param {*} options 
+   * @param {*} options
    */
   spinner(options) {
-    if (typeof options === 'string') {
-			options = {
-				text: options
-			};
+    if (typeof options === "string") {
+      options = {
+        text: options
+      };
     }
-    let options = Object.assign({
-			text: '',
-      color: 'blue',
-      spinner: 'point'
-		}, options);
-    
-    return ora(options);
+    let spinnerParams = Object.assign(
+      {
+        text: "",
+        color: "blue",
+        spinner: "point"
+      },
+      options
+    );
+
+    return ora(spinnerParams);
   }
 };
