@@ -9,28 +9,32 @@ const tablularPrint = require("./api/print_details");
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
 program
-  .option("-l, --login", "Login Using JIRA API Token")
-  .option("--open <key>", "Open Issue Using KEYS for Given Key")
-  .option("--details <key>", "Prints Issue Details for Given Key")
-  .option(
-    "-r, --open-board <key>",
-    "Open Rapid Board for the Given Project Key"
-  )
-  .option("--list", "List of To Do issues for the current User")
-  .option("--completed", "List of completed issues")
-  .option("--inreview", "List of issues which are in review")
-
+  .option("-l, login", "Login Using JIRA API Token")
+  .option("-r, open-board <key>", "Open Rapid Board for the Given Project Key")
+  .option("open <key>", "Open Issue Using KEYS for Given Key")
+  .option("details <key>", "Prints Issue Details for Given Key")
+  .option("list", "List of To Do issues for the current User")
+  .option("completed", "List of completed issues")
+  .option("inreview", "List of issues which are in review")
+  .option("comments <key>", "Get all the comments for the issue")
+  .option("add-comment <key> <comment>", "Add Comment to the Given Issues");
 
 program.parse(process.argv);
+
+if (process.argv.length < 3) {
+  program.help();
+}
 
 if (program.login) {
   input.signUpUser();
 }
+
 if (program.details) {
   tablularPrint.printIssueDetails({ issueKey: program.details });
 }
-if (program.openIssue) {
-  issue.openIssue(program.openIssue);
+
+if (program.open) {
+  issue.openIssue(program.open);
 }
 if (program.openBoard) {
   project.openRapidBoard(program.openBoard);
@@ -43,4 +47,13 @@ if (program.completed) {
 }
 if (program.inreview) {
   issue.fetchMyInReviewIssues();
+}
+if (program.addComment) {
+  issue.addComment({
+    issueKey: program.addComment,
+    comment: program.args.join(" ")
+  });
+}
+if (program.comments) {
+  issue.getComments(program.comments);
 }

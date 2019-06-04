@@ -43,19 +43,65 @@ module.exports = {
         );
       });
     } else {
-      consoleApi.printInfo("No issues found")
+      consoleApi.printInfo("No issues found");
     }
+  },
+  /** Add comment to the issue
+   * { issueKey: 'SFMAC-19', comment: 'some comment'"}
+   * @param {*} options
+   */
+  addComment: function(options) {
+    let spinner = util.spinner("Posting your comment. Please wait");
+    spinner.start();
+    authenticate
+      .currentUser()
+      .issue.addComment(options, function(error, response) {
+        if (response) {
+          spinner.stop();
+          consoleApi.printInfo("Comment added successfully");
+        }
+        if (error) {
+          spinner.stop();
+          consoleApi.printError("No issue with mentioned key found");
+        }
+      });
+  },
+
+  getComments: function(issueKey) {
+    let spinner = util.spinner({
+      text: "Fetching data...",
+      spinner: "earth"
+    });
+    spinner.start();
+    authenticate
+      .currentUser()
+      .issue.getComments({ issueKey: issueKey }, function(error, response) {
+        if (response) {
+          spinner.stop();
+          if (response.comments.length === 0) {
+            consoleApi.printInfo("No Comments Found");
+          } else {
+            response.comments.map(comment => {
+              console.log(
+                `${comment.id} ${consoleApi.chalkGreen(
+                  comment.author.displayName.split(" ")[0]
+                )} ${comment.body} \n`
+              );
+            });
+          }
+        }
+      });
   },
 
   fetchMyOpenIssues: function() {
     jqlClient.myOpenIssues({}, function(response) {
-      module.exports.printIssues(response)
+      module.exports.printIssues(response);
     });
   },
 
   fetchMyInReviewIssues: function() {
     jqlClient.myInReviewIssues({}, function(response) {
-      module.exports.printIssues(response)
+      module.exports.printIssues(response);
     });
   },
 

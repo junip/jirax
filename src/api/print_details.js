@@ -5,7 +5,7 @@
 const issue = require("./issue_client");
 const consoleApi = require("../api/console");
 const util = require("../utils");
-const spinner = util.spinner({text: "Loading details..", spinner: 'moon'})
+const spinner = util.spinner({ text: "Loading details..", spinner: "moon" });
 
 module.exports = {
   printInConsole(issue) {
@@ -72,8 +72,8 @@ module.exports = {
     spinner.start();
     // find and print in the console
     issue.getIssue(issueObject, function(response) {
-      if(response) {
-        spinner.stop()
+      if (response) {
+        spinner.stop();
       }
       issueObject = {
         key: response.key,

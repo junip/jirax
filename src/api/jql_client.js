@@ -3,12 +3,11 @@
  */
 const authenticate = require("../authentication");
 const util = require("../utils");
-const spinner = util.spinner({text: 'Fetching data...', spinner: 'earth'});
+const spinner = util.spinner({ text: "Fetching data...", spinner: "earth" });
 
 const todoJQL = "assignee = currentUser() AND status='To Do'";
 const completedJQL = "assignee = currentUser() AND status='Done'";
 const inReviewJQL = "assignee = currentUser() AND status='In Review'";
-
 
 module.exports = {
   formatIssuesData(response) {
@@ -23,8 +22,8 @@ module.exports = {
           summary: issue.fields.summary,
           type: issue.fields.issuetype.name
         };
-      }); 
-    } 
+      });
+    }
     return issues;
   },
   /**
@@ -42,9 +41,9 @@ module.exports = {
       });
   },
   /**
-   * @return current user issues which are in review 
-   * @param {*} param0 
-   * @param {*} callback 
+   * @return current user issues which are in review
+   * @param {*} param0
+   * @param {*} callback
    */
   myInReviewIssues: function({}, callback) {
     spinner.start();
@@ -56,8 +55,8 @@ module.exports = {
   },
   /**
    * @return Current User completed issues list
-   * @param {*} param0 
-   * @param {*} callback 
+   * @param {*} param0
+   * @param {*} callback
    */
   myCompletedIssues: function({}, callback) {
     spinner.start();
