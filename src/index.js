@@ -17,7 +17,8 @@ program
   .option("completed", "List of completed issues")
   .option("inreview", "List of issues which are in review")
   .option("comments <key>", "Get all the comments for the issue")
-  .option("add-comment <key> <comment>", "Add Comment to the Given Issues");
+  .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
+  .option("assign <key> <assignee>", "Assign issue to another user");
 
 program.parse(process.argv);
 
@@ -56,4 +57,11 @@ if (program.addComment) {
 }
 if (program.comments) {
   issue.getComments(program.comments);
+}
+
+if(program.assign) {
+  issue.assignIssue({
+    issueKey: program.assign,
+    assignee: program.args.join(" ")
+  })
 }

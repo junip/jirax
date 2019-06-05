@@ -109,5 +109,23 @@ module.exports = {
     jqlClient.myCompletedIssues({}, function(response) {
       module.exports.printIssues(response);
     });
+  },
+
+  assignIssue: function(options) {
+    let spinner = util.spinner(`Assigning the issue to ${options.assignee}`);
+    spinner.start();
+    authenticate
+      .currentUser().issue.assignIssue(options,function(error, success){
+        if(success || error) {
+          spinner.stop()
+        }
+        if(error) {
+          consoleApi.printError(error.errors.assignee)
+        }
+        if(success) {
+          consoleApi.printInfo(success)
+        }
+      })
   }
+
 };
