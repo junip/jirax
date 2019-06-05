@@ -42,5 +42,8 @@
     "ora": "^3.4.0",
     "prettier": "1.17.1"
   },
+  "pkg": {
+    "assets": "./node_modules/figlet/fonts/Standard.flf"
+  },
   "dependencies": {}
 }
