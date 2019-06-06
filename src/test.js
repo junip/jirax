@@ -5,6 +5,10 @@ const logUpdate = require("log-update");
 const ora = require("ora");
 const util = require("./utils");
 
-function add() {}
+function add() {
+    authenticate.currentUser().myself.getMyself({}, function(error, success) {
+        console.log(success)
+    })
+}
 
 add();

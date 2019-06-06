@@ -50,7 +50,6 @@ module.exports = {
 
     if (!HOST_NAME) {
       console.log("Please Loggin using your API Token");
-      console.log("Use command jirax-cli --login");
     } else {
       var JIRA_AUTH = new jiraConnector({
         host: HOST_NAME,

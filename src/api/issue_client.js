@@ -117,10 +117,10 @@ module.exports = {
     authenticate
       .currentUser().issue.assignIssue(options,function(error, success){
         if(success || error) {
-          spinner.stop()
+          spinner.stop();
         }
         if(error) {
-          consoleApi.printError(error.errors.assignee)
+          consoleApi.printError("Issue Cannnot be assigned")
         }
         if(success) {
           consoleApi.printInfo(success)
