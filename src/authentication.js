@@ -4,7 +4,6 @@
  * return the jiraAuth BASE object and then we can call the apis
  * on the base of the main object.
  */
-// your API Token = WwUjxh5TM2QkGovimPrc2FDB;
 
 const jiraConnector = require("jira-connector");
 const encode = require("./encode");

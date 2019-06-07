@@ -1,35 +1,43 @@
 # jirax
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)]() [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)]() [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)]() [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 
 
 
-![made with nodejs](https://img.shields.io/badge/madewith-node.js-green.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/visionmedia/superagent.svg)](LICENSE)
+![made with nodejs](https://img.shields.io/badge/madewith-node.js-green.svg) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/visionmedia/superagent.svg)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 
 
 
-A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA client.
+A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
 
 ## Prerequisites
 
-You are required to have [Node.js](https://nodejs.org/) installed to run the app locally.
+You are required to have [Node.js](https://nodejs.org/) installed to run the cli tool or 
+you can run the excutable to use the tool. [Make executable](https://github.com/junipdewan/jirax/blob/master/README.md/#making-executable)
 
 ## Getting Started
 
-1. Log in to [Atlassian](https://id.atlassian.com/manage/api-tokens) and        generate your API TOKEN.
+1. Log in to [Atlassian](https://id.atlassian.com/manage/api-tokens) and generate your API TOKEN.
 2. Copy the API TOKEN
 
-## Making executable
+## Using Nodejs
 
-After cloning the repository. Run this command this command will automatically create plateform specific executables.
+Install all dependency 
 
 ```sh
- npm run build
+npm install 
 ```
+
+### Create the symlink. This command will help you execute `jirax` commands at global level 
+
+```
+npm link or sudo npm link
+```
+
 
 ## Login In Cli
 
 ```sh
-jirax --login
+jirax -l
 ```
 
 This will prompt few questions to enter your credentials please enter the credentials to use the CLI
@@ -43,6 +51,14 @@ $ Your API Token
 ## Cli help
 ```sh
 jirax --help 
+```
+
+## Making executable
+
+After cloning the repository. Run this command this command will automatically create plateform specific executables.
+
+```sh
+ npm run build
 ```
 
 ## Contribution
@@ -63,4 +79,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
