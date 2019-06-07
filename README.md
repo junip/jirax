@@ -1,4 +1,4 @@
-# jirax-cli
+# jirax
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
 
@@ -29,7 +29,7 @@ After cloning the repository. Run this command this command will automatically c
 ## Login In Cli
 
 ```sh
-jirax-cli --login
+jirax --login
 ```
 
 This will prompt few questions to enter your credentials please enter the credentials to use the CLI
@@ -42,7 +42,7 @@ $ Your API Token
 
 ## Cli help
 ```sh
-jirax-cli --help 
+jirax --help 
 ```
 
 ## Contribution
@@ -51,20 +51,9 @@ Here in the CLI tool only few of the use cases have been implemented which are m
 You can help with code contribution to add more functionality to the CLI tool.
 
 
-## Credits
-
-### Contributors
-
-<div style="display: flex;">
-  <a href="https://github.com/junipdewan" target="blank"><img src="https://avatars0.githubusercontent.com/u/19765255?s=460&v=4" width="50" height="50" style="border-radius: 50%; margin-right:20px;" title="hover text"></a>
-  <a href="https://github.com/Prashant-Thorat" target="blank"><img src="https://avatars0.githubusercontent.com/u/22951098?s=460&v=4" width="50" height="50" style="border-radius: 50%;" title="hover text"></a>
-</div>
-
-
-
 ## MIT License
 
-**JIRAX-CLI** is available under the **MIT license**. See the [LICENSE](https://github.com/junipdewan/jira-cli/blob/master/LICENSE) file for more info.
+**jirax** is available under the **MIT license**. See the [LICENSE](https://github.com/junipdewan/jirax/blob/master/LICENSE) file for more info.
 
 
 Copyright (c) 2019 <junipd2@gmail.com>

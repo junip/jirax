@@ -17,8 +17,6 @@ module.exports = {
    */
   authenticate: function(config, callback) {
     let HOST_NAME = config.host_name
-      ? config.host_name
-      : "promobi.atlassian.net";
     let encodedString64 = encode.encodeToBase64(config);
 
     // JIRA BASE OBJECT

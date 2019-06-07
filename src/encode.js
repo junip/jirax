@@ -4,7 +4,7 @@
  *
  * Encoded to base64 - `username:password`
  * using node.js Buffer Class `https://nodejs.org/api/buffer.html`
- * -----WwUjxh5TM2QkGovimPrc2FDB
+ * 
  */
 
 "use strict";

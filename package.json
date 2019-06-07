@@ -1,10 +1,10 @@
 {
-  "name": "jirax-cli",
+  "name": "jirax",
   "version": "1.0.0",
   "description": "A sample cli tool that shows reports about jira bug count",
   "main": "index.js",
   "bin": {
-    "jirax-cli": "./src/index.js"
+    "jirax": "./src/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,24 +13,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/junipdewan/jira-cli.git"
+    "url": "git+https://github.com/junipdewan/jirax.git"
   },
   "keywords": [
     "jira-cli",
-    "jira-bug-count",
-    "jira-cmd"
+    "jira-tool",
+    "jira-cmd",
+    "cli",
+    "jira"
   ],
   "author": "Junip Dewan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/junipdewan/jira-cli/issues"
+    "url": "https://github.com/junipdewan/jirax/issues"
   },
-  "homepage": "https://github.com/junipdewan/jira-cli#readme",
+  "homepage": "https://github.com/junipdewan/jirax#readme",
   "devDependencies": {
-    "axios": "^0.18.0",
     "chalk": "^2.4.2",
-    "clear": "^0.1.0",
-    "cli-table3": "^0.5.1",
     "commander": "^2.20.0",
     "configstore": "^4.0.0",
     "dateformat": "^3.0.3",
