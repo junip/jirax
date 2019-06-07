@@ -5,6 +5,7 @@ const input = require("./store");
 const issue = require("./api/issue_client");
 const project = require("./api/project_client");
 const tablularPrint = require("./api/print_details");
+const jql = require("./api/jql_client")
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
@@ -18,6 +19,7 @@ program
   .option("inreview", "List of issues which are in review")
   .option("comments <key>", "Get all the comments for the issue")
   .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
+  .option("delete-comment <key> <comment-id>", "delete the comment for specific issuekey")
   .option("assign <key> <assignee>", "Assign issue to another user");
 
 program.parse(process.argv);
@@ -41,13 +43,13 @@ if (program.openBoard) {
   project.openRapidBoard(program.openBoard);
 }
 if (program.list) {
-  issue.fetchMyOpenIssues();
+  jql.fetchMyOpenIssues();
 }
 if (program.completed) {
-  issue.fetchMyCompletedIssues();
+  jql.fetchMyCompletedIssues();
 }
 if (program.inreview) {
-  issue.fetchMyInReviewIssues();
+  jql.fetchMyInReviewIssues();
 }
 if (program.addComment) {
   issue.addComment({
@@ -59,9 +61,17 @@ if (program.comments) {
   issue.getComments(program.comments);
 }
 
-if(program.assign) {
+if(program.deleteComment) {
+  options = { 
+    issueKey: program.deleteComment,
+    commentId: program.args[0]
+  }
+  issue.deleteComment(options)
+}
+
+if (program.assign) {
   issue.assignIssue({
     issueKey: program.assign,
     assignee: program.args.join(" ")
-  })
+  });
 }

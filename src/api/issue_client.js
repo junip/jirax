@@ -31,21 +31,26 @@ module.exports = {
     let URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   },
-  /**
-   * Print the issue listing in a proper format
-   * @param {*} issues
-   */
-  printIssues: function(issues) {
-    if (issues) {
-      issues.map(issue => {
-        console.log(
-          `${issue.key} ${util.setIssueColor(issue.type)} ${issue.summary} \n`
-        );
+  
+  assignIssue: function(options) {
+    let spinner = util.spinner(`Assigning the issue to ${options.assignee}`);
+    spinner.start();
+    authenticate
+      .currentUser()
+      .issue.assignIssue(options, function(error, success) {
+        if (success || error) {
+          spinner.stop();
+        }
+        if (error) {
+          consoleApi.printError("Issue Cannnot be assigned");
+        }
+        if (success) {
+          consoleApi.printInfo(success);
+        }
       });
-    } else {
-      consoleApi.printInfo("No issues found");
-    }
   },
+
+  //------------------------------COMMENTS RELATED FUNCTIONS------------------>
   /** Add comment to the issue
    * { issueKey: 'SFMAC-19', comment: 'some comment'"}
    * @param {*} options
@@ -66,7 +71,10 @@ module.exports = {
         }
       });
   },
-
+  /**
+   * Get all the comments for the specific issue
+   * @param {*} issueKey
+   */
   getComments: function(issueKey) {
     let spinner = util.spinner({
       text: "Fetching data...",
@@ -93,39 +101,26 @@ module.exports = {
       });
   },
 
-  fetchMyOpenIssues: function() {
-    jqlClient.myOpenIssues({}, function(response) {
-      module.exports.printIssues(response);
-    });
-  },
-
-  fetchMyInReviewIssues: function() {
-    jqlClient.myInReviewIssues({}, function(response) {
-      module.exports.printIssues(response);
-    });
-  },
-
-  fetchMyCompletedIssues: function() {
-    jqlClient.myCompletedIssues({}, function(response) {
-      module.exports.printIssues(response);
-    });
-  },
-
-  assignIssue: function(options) {
-    let spinner = util.spinner(`Assigning the issue to ${options.assignee}`);
+  /*
+   * Delete the comment for the given issueKey
+   * @param {string} [opts.issueKey] The Key of the issue.  EX: JWR-3
+   * @param {string} opts.commentId The id of the comment.
+   * @param {*} opts
+   */
+  deleteComment: function(opts) {
+    let spinner = util.spinner('Deleting comment .....')
     spinner.start();
     authenticate
-      .currentUser().issue.assignIssue(options,function(error, success){
-        if(success || error) {
+      .currentUser()
+      .issue.deleteComment(opts, function(error, response) {
+        if (error) {
           spinner.stop();
+          consoleApi.printError("Error while deleting the comment");
         }
-        if(error) {
-          consoleApi.printError("Issue Cannnot be assigned")
+        if (response) {
+          spinner.stop();
+          consoleApi.printInfo("Comment deleted");
         }
-        if(success) {
-          consoleApi.printInfo(success)
-        }
-      })
+      });
   }
-
 };

@@ -26,6 +26,22 @@ module.exports = {
     }
     return issues;
   },
+
+  /**
+   * Print the issue listing in a proper format
+   * @param {*} issues
+   */
+  printIssues: function(issues) {
+    if (issues) {
+      issues.map(issue => {
+        console.log(
+          `${issue.key} ${util.setIssueColor(issue.type)} ${issue.summary} \n`
+        );
+      });
+    } else {
+      consoleApi.printInfo("No issues found");
+    }
+  },
   /**
    *
    * @param {*} param0
@@ -65,5 +81,30 @@ module.exports = {
       .search.search({ jql: completedJQL }, function(error, response) {
         return callback(module.exports.formatIssuesData(response));
       });
+  },
+
+  fetchMyOpenIssues: function() {
+    module.exports.myOpenIssues({}, function(response) {
+      module.exports.printIssues(response);
+    });
+  },
+
+  fetchMyInReviewIssues: function() {
+    module.exports.myInReviewIssues({}, function(response) {
+      module.exports.printIssues(response);
+    });
+  },
+
+  fetchMyCompletedIssues: function() {
+    module.exports.myCompletedIssues({}, function(response) {
+      module.exports.printIssues(response);
+    });
   }
+
+
+
+
+
+
+
 };

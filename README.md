@@ -1,6 +1,7 @@
-# jira-cli
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+# jirax-cli
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+
+
 
 ![made with nodejs](https://img.shields.io/badge/madewith-node.js-green.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/visionmedia/superagent.svg)](LICENSE)
 
@@ -28,7 +29,7 @@ After cloning the repository. Run this command this command will automatically c
 ## Login In Cli
 
 ```sh
-jira-cli --login
+jirax-cli --login
 ```
 
 This will prompt few questions to enter your credentials please enter the credentials to use the CLI
@@ -41,7 +42,7 @@ $ Your API Token
 
 ## Cli help
 ```sh
-jira-cli --help 
+jirax-cli --help 
 ```
 
 ## Contribution
