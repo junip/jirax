@@ -5,7 +5,9 @@ const input = require("./store");
 const issue = require("./api/issue_client");
 const project = require("./api/project_client");
 const tablularPrint = require("./api/print_details");
-const jql = require("./api/jql_client")
+const jql = require("./api/jql_client");
+const question = require('./api/questions');
+const print = require('./api/console')
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
@@ -14,12 +16,16 @@ program
   .option("-r, open-board <key>", "Open Rapid Board for the Given Project Key")
   .option("open <key>", "Open Issue Using KEYS for Given Key")
   .option("details <key>", "Prints Issue Details for Given Key")
+  .option("move <key>", "Move issue from one status to another")
   .option("list", "List of To Do issues for the current User")
   .option("completed", "List of completed issues")
   .option("inreview", "List of issues which are in review")
   .option("comments <key>", "Get all the comments for the issue")
   .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
-  .option("delete-comment <key> <comment-id>", "delete the comment for specific issuekey")
+  .option(
+    "delete-comment <key> <comment-id>",
+    "delete the comment for specific issuekey"
+  )
   .option("assign <key> <assignee>", "Assign issue to another user");
 
 program.parse(process.argv);
@@ -61,12 +67,12 @@ if (program.comments) {
   issue.getComments(program.comments);
 }
 
-if(program.deleteComment) {
-  options = { 
+if (program.deleteComment) {
+  options = {
     issueKey: program.deleteComment,
     commentId: program.args[0]
-  }
-  issue.deleteComment(options)
+  };
+  issue.deleteComment(options);
 }
 
 if (program.assign) {
@@ -74,4 +80,16 @@ if (program.assign) {
     issueKey: program.assign,
     assignee: program.args.join(" ")
   });
+}
+// moving issue dependency
+if (program.move) {
+  question.askIssueTranstions(program.move, function(data){
+    if(typeof data === "string") {
+      print.printError(data)
+    } else {
+      data.then(answers => {
+        issue.changeStatus({issueKey: program.move, transition: answers['transtion']})
+      })
+    }
+  })
 }

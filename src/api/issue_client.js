@@ -31,7 +31,55 @@ module.exports = {
     let URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   },
-  
+  /**
+   * A method return array of transtions available for the specific issues
+   * @param options.issuekey isssue keys to which this
+   * @param {*} options
+   */
+  getTranstions: function(issuekey, cb) {
+    let spinner = util.spinner({text: 'Fetching available transtions...', spinner: 'earth'})
+    spinner.start()
+    authenticate
+      .currentUser()
+      .issue.getTransitions({issueKey: issuekey}, function(error, success) {
+        let availableTranstions = [];
+        if (success) {
+          spinner.stop()
+          success.transitions.map(t => {
+            availableTranstions.push({ name: t.name, value: t.id });
+          });
+          return cb(availableTranstions);
+        }
+        if (error) {
+          spinner.stop()
+          cb(error.errorMessages[0])
+        }
+      });
+  },
+  /**
+   *  This method changes the status of the issue
+   *
+   * @param{String} object.transtion - id to which issue transtion will happen
+   * @param{String} object.issueKey - issuekey for which issue transtion happen
+   * @param {*} object
+   */
+  changeStatus: function(object) {
+    let spinner = util.spinner("Changing transtion...");
+    spinner.start();
+    authenticate
+      .currentUser()
+      .issue.transitionIssue(object, function(error, success) {
+        if (success) {
+          spinner.stop();
+          consoleApi.printInfo(success);
+        }
+        if(error) {
+          spinner.stop();
+          consoleApi.printError(error)
+        }
+      });
+  },
+
   assignIssue: function(options) {
     let spinner = util.spinner(`Assigning the issue to ${options.assignee}`);
     spinner.start();
@@ -108,7 +156,7 @@ module.exports = {
    * @param {*} opts
    */
   deleteComment: function(opts) {
-    let spinner = util.spinner('Deleting comment .....')
+    let spinner = util.spinner("Deleting comment .....");
     spinner.start();
     authenticate
       .currentUser()

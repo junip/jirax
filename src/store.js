@@ -55,6 +55,8 @@ module.exports = {
     configStore.set({ hostname: hostname });
     configStore.set({ encodedString: encodedString });
 
-    console.log(chalk.green.bold("You have Logged in Successfully"));
+    console.log(
+      chalk.green.bold("You have Logged in Successfully") + "  🍺🎉🎊"
+    );
   }
 };

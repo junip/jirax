@@ -15,7 +15,7 @@ module.exports = {
    * @param {*} config
    */
   authenticate: function(config, callback) {
-    let HOST_NAME = config.host_name
+    let HOST_NAME = config.host_name;
     let encodedString64 = encode.encodeToBase64(config);
 
     // JIRA BASE OBJECT

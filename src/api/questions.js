@@ -2,6 +2,8 @@
  * Taking User Input using with Question Prompt
  */
 const inquirer = require("inquirer");
+const issue = require("../api/issue_client");
+const consoleApi = require('./console')
 const credentialQuestion = [
   {
     type: "input",
@@ -34,5 +36,20 @@ module.exports = {
   // asking credential for the input from user
   askCredential: function() {
     return inquirer.prompt(credentialQuestion);
+  },
+
+  askIssueTranstions: function(issueKey, cb) {
+    issue.getTranstions(issueKey, function(data){
+      if(typeof data == "string"){
+        return cb(data);
+      } else {
+        return cb(inquirer.prompt([{
+          type: 'list',
+          name: 'transtion',
+          message: 'Please select the transtion type',
+          choices: data
+        }]))
+      }
+    })
   }
 };

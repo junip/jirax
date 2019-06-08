@@ -100,11 +100,4 @@ module.exports = {
       module.exports.printIssues(response);
     });
   }
-
-
-
-
-
-
-
 };
