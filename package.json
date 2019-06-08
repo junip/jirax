@@ -1,7 +1,8 @@
 {
   "name": "jirax",
   "version": "1.0.0",
-  "description": "A sample cli tool that shows reports about jira bug count",
+  "description": "A sample and flexible cli tool to handle JIRA activity",
+  "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
   "bin": {
     "jirax": "./src/index.js"
@@ -28,7 +29,6 @@
     "jirax-cli",
     "jira-cmd"
   ],
-  "author": "Junip Dewan",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/junipdewan/jirax/issues"
@@ -41,7 +41,7 @@
     "dateformat": "^3.0.3",
     "figlet": "^1.2.1",
     "inquirer": "^6.3.1",
-    "jira-connector": "^2.10.0",
+    "jira-connector": "^2.11.0",
     "log-update": "^3.2.0",
     "minimist": "^1.2.0",
     "open": "^6.3.0",
