@@ -16,11 +16,17 @@
     "url": "git+https://github.com/junipdewan/jirax.git"
   },
   "keywords": [
+    "jira",
     "jira-cli",
     "jira-tool",
     "jira-cmd",
     "cli",
-    "jira"
+    "jira",
+    "terminal",
+    "console",
+    "shell",
+    "jirax-cli",
+    "jira-cmd"
   ],
   "author": "Junip Dewan",
   "license": "MIT",

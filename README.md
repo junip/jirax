@@ -9,10 +9,13 @@
 
 A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
 
+
+![Interface](assets/cli_help.jpg?raw=true "CLI Help Preview")
+
+
 ## Prerequisites
 
-You are required to have [Node.js](https://nodejs.org/) installed to run the cli tool or 
-you can run the excutable to use the tool. [Make executable](https://github.com/junipdewan/jirax/blob/master/README.md/#making-executable)
+You are required to have [Node.js](https://nodejs.org/) installed to run the cli tool or after installing [Node.js](https://nodejs.org/) you can make executable and run the excutable to use the tool. [Make executable](#making-executable)
 
 ## Getting Started
 
@@ -23,11 +26,13 @@ you can run the excutable to use the tool. [Make executable](https://github.com/
 
 Install all dependency 
 
+
 ```sh
 npm install 
 ```
 
 ### Create the symlink. This command will help you execute `jirax` commands at global level 
+
 
 ```
 npm link or sudo npm link
@@ -36,11 +41,13 @@ npm link or sudo npm link
 
 ## Login In Cli
 
+
 ```sh
 jirax -l
 ```
 
 This will prompt few questions to enter your credentials please enter the credentials to use the CLI
+
 
 ```sh
 $ Host name to use JIRA (for eg: something.atlassian.com)
@@ -49,6 +56,7 @@ $ Your API Token
 ```
 
 ## Cli help
+
 ```sh
 jirax --help 
 ```
