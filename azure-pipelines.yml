@@ -16,12 +16,20 @@ steps:
   displayName: 'Install Node.js'
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: |
+    SourceFolder: '$(Agent.BuildDirectory)'
+    Contents: 'jirax-linux
       jirax-macos
-      jirax-linux
-      jirax-win.exe
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      jirax-win.exe'
+    TargetFolder: 'Build.ArtifactStagingDirectory'
+    CleanTargetFolder: true
+- task: GitHubRelease@0
+  inputs:
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'auto'
+    isDraft: true
+    addChangeLog: false
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
@@ -29,4 +37,5 @@ steps:
 - script: |
     npm install
     npm run build
+    npm run format
   displayName: 'npm install'
