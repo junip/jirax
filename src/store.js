@@ -4,11 +4,11 @@
  */
 
 const Configstore = require("configstore");
+const configStore = new Configstore("jiraconfig");
 const jira = require("./authentication");
 const print = require("./api/console");
 const chalk = require("chalk");
 const question = require("./api/questions");
-const configStore = new Configstore("jiraconfig");
 const util = require("./utils");
 const spinner = util.spinner(" Authenticating...");
 /**

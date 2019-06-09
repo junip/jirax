@@ -39,7 +39,7 @@ module.exports = {
   },
 
   askIssueTranstions: function(issueKey, cb) {
-    issue.getTranstions(issueKey, function(data){
+    issue.getStoredTranstions(issueKey, function(data){
       if(typeof data == "string"){
         return cb(data);
       } else {

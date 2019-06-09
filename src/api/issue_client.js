@@ -5,7 +5,8 @@ const authenticate = require("../authentication");
 const open = require("open");
 const util = require("../utils");
 const consoleApi = require("../api/console");
-const jqlClient = require("./jql_client");
+const Configstore = require("configstore");
+const configStore = new Configstore("jiraconfig");
 
 module.exports = {
   /**
@@ -36,18 +37,20 @@ module.exports = {
    * @param options.issuekey isssue keys to which this
    * @param {*} options
    */
-  getTranstions: function(issuekey, cb) {
+  getTranstions: function(issueKey, cb) {
+    let key = issueKey.split('-')[0];
     let spinner = util.spinner({text: 'Fetching available transtions...', spinner: 'earth'})
     spinner.start()
     authenticate
       .currentUser()
-      .issue.getTransitions({issueKey: issuekey}, function(error, success) {
+      .issue.getTransitions({issueKey: issueKey}, function(error, success) {
         let availableTranstions = [];
         if (success) {
           spinner.stop()
           success.transitions.map(t => {
             availableTranstions.push({ name: t.name, value: t.id });
           });
+          configStore.set(key, availableTranstions);
           return cb(availableTranstions);
         }
         if (error) {
@@ -97,7 +100,23 @@ module.exports = {
         }
       });
   },
-
+  
+  /**
+   * Get the issue statuses of project for the given issue
+   * @param {*} issueKey 
+   */
+  getStoredTranstions(issueKey,cb) {
+    let key = issueKey.split('-')[0];
+    let keyPresent = configStore.get(key);
+    if(!keyPresent) {
+      module.exports.getTranstions(issueKey, function(data){
+        return cb(data)
+      });
+    } else {
+      let transitions =  configStore.get(key);
+      return cb(transitions)
+    }
+  },
   //------------------------------COMMENTS RELATED FUNCTIONS------------------>
   /** Add comment to the issue
    * { issueKey: 'SFMAC-19', comment: 'some comment'"}
