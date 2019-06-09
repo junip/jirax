@@ -24,7 +24,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 - task: GitHubRelease@0
   inputs:
-    gitHubConnection: 'junipdewan'
+    gitHubConnection: 'grantjunipdewan'
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
