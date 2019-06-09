@@ -22,6 +22,17 @@ steps:
       jirax-linux
       jirax-win.exe
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: GitHubRelease@0
+  inputs:
+    gitHubConnection:  'junipdewan'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'auto'
+    title: 'First Release'
+    isDraft: true
+    assets: '$(Build.ArtifactStagingDirectory)'
+    assetUploadMode: 'delete'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
