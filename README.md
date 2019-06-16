@@ -3,12 +3,16 @@
 
 
 
-[![Build Status](https://dev.azure.com/junipd2/jirax/_apis/build/status/junipdewan.jirax?branchName=master)](https://dev.azure.com/junipd2/jirax/_build/latest?definitionId=4&branchName=master) ![made with nodejs](https://img.shields.io/badge/madewith-node.js-green.svg) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/visionmedia/superagent.svg)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com) 
+
+[![Build Status](https://dev.azure.com/junipd2/jirax/_apis/build/status/junipdewan.jirax?branchName=master)](https://dev.azure.com/junipd2/jirax/_build/latest?definitionId=4&branchName=master) ![npm](https://img.shields.io/npm/dm/jirax.svg) ![made with nodejs](https://img.shields.io/badge/madewith-node.js-green.svg) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/visionmedia/superagent.svg)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com) 
 
 A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
 
 
 ![Interface](assets/cli_help.jpg?raw=true "CLI Help Preview")
+
+### Asciicast Preview
+[![asciicast](https://asciinema.org/a/251931.png)](https://asciinema.org/a/251931)
 
 
 ## Prerequisites
@@ -69,9 +73,7 @@ After cloning the repository. Run this command this command will automatically c
 
 ## Contribution
 
-Here in the CLI tool only few of the use cases have been implemented which are more basic usage with JIRA client.
-You can help with code contribution to add more functionality to the CLI tool.
-
+We hope that you will consider contributing to Jirax. Please read this short overview [Contribution Guidelines](https://github.com/junipdewan/jirax/blob/master/CONTRIBUTING.md) for some information about how to get started 
 
 ## MIT License
 
