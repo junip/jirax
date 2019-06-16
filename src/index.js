@@ -26,7 +26,8 @@ program
     "delete-comment <key> <comment-id>",
     "delete the comment for specific issuekey"
   )
-  .option("assign <key> <assignee>", "Assign issue to another user");
+  .option('assign-me <key>', "Assign issue to self(i.e logged in user")
+  .option("assign <key> <assignee>", "Assign issue to another user")
 
 program.parse(process.argv);
 
@@ -92,4 +93,8 @@ if (program.move) {
       })
     }
   })
+}
+
+if(program.assignMe) {
+  issue.assignSelf(program.assignMe);
 }

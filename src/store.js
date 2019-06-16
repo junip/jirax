@@ -51,10 +51,11 @@ module.exports = {
     // saving the data
     let hostname = data.hostname;
     let encodedString = data.encodedString;
+    let accountId = data.success.accountId;
     let configStore = new Configstore("jiraconfig");
     configStore.set({ hostname: hostname });
     configStore.set({ encodedString: encodedString });
-
+    configStore.set({ accountId: accountId });
     console.log(
       chalk.green.bold("You have Logged in Successfully") + "  🍺🎉🎊"
     );

@@ -84,7 +84,7 @@ module.exports = {
   },
 
   assignIssue: function(options) {
-    let spinner = util.spinner(`Assigning the issue to ${options.assignee}`);
+    let spinner = util.spinner(`Assigning the issue`);
     spinner.start();
     authenticate
       .currentUser()
@@ -99,6 +99,19 @@ module.exports = {
           consoleApi.printInfo(success);
         }
       });
+  },
+  /**
+   * Assign the issue to self i.e logged in user
+   * @param issueKey
+   * @param {*} issueKey 
+   */
+  assignSelf: function(issueKey) {
+    let accountId = configStore.get('accountId')
+
+    module.exports.assignIssue({
+      issueKey: issueKey,
+      accountId: accountId
+    });
   },
   
   /**
