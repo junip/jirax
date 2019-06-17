@@ -6,15 +6,16 @@ const issue = require("./api/issue_client");
 const project = require("./api/project_client");
 const tablularPrint = require("./api/print_details");
 const jql = require("./api/jql_client");
-const question = require('./api/questions');
-const print = require('./api/console')
+const question = require("./api/questions");
+const print = require("./api/console");
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
 program
   .option("-l, login", "Login Using JIRA API Token")
   .option("-r, open-board <key>", "Open Rapid Board for the Given Project Key")
-  .option("open <key>", "Open Issue Using KEYS for Given Key")
+  .option("open <key>", "Open specific issue for the given issuekey")
+  .option("issues <key>", "Opens all the issue list for the given project key")
   .option("details <key>", "Prints Issue Details for Given Key")
   .option("move <key>", "Move issue from one status to another")
   .option("list", "List of To Do issues for the current User")
@@ -26,9 +27,8 @@ program
     "delete-comment <key> <comment-id>",
     "delete the comment for specific issuekey"
   )
-  .option('assign-me <key>', "Assign issue to self(i.e logged in user")
-  .option("assign <key> <assignee>", "Assign issue to another user")
-
+  .option("assign-me <key>", "Assign issue to self(i.e logged in user")
+  .option("assign <key> <assignee>", "Assign issue to another user");
 program.parse(process.argv);
 
 if (process.argv.length < 3) {
@@ -84,17 +84,24 @@ if (program.assign) {
 }
 // moving issue dependency
 if (program.move) {
-  question.askIssueTranstions(program.move, function(data){
-    if(typeof data === "string") {
-      print.printError(data)
+  question.askIssueTranstions(program.move, function(data) {
+    if (typeof data === "string") {
+      print.printError(data);
     } else {
       data.then(answers => {
-        issue.changeStatus({issueKey: program.move, transition: answers['transtion']})
-      })
+        issue.changeStatus({
+          issueKey: program.move,
+          transition: answers["transtion"]
+        });
+      });
     }
-  })
+  });
 }
 
-if(program.assignMe) {
+if (program.assignMe) {
   issue.assignSelf(program.assignMe);
+}
+
+if (program.issues) {
+  issue.openProjectIssues(program.issues);
 }

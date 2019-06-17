@@ -32,21 +32,35 @@ module.exports = {
     let URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   },
+
+  /**
+   * this method opens the issues for the given project key
+   *
+   * @param {*} projectKey
+   */
+  openProjectIssues: function(projectKey) {
+    let hostName = util.getHostName();
+    let URL = `https://${hostName}/projects/${projectKey}/issues`;
+    open(URL);
+  },
   /**
    * A method return array of transtions available for the specific issues
    * @param options.issuekey isssue keys to which this
    * @param {*} options
    */
   getTranstions: function(issueKey, cb) {
-    let key = issueKey.split('-')[0];
-    let spinner = util.spinner({text: 'Fetching available transtions...', spinner: 'earth'})
-    spinner.start()
+    let key = issueKey.split("-")[0];
+    let spinner = util.spinner({
+      text: "Fetching available transtions...",
+      spinner: "earth"
+    });
+    spinner.start();
     authenticate
       .currentUser()
-      .issue.getTransitions({issueKey: issueKey}, function(error, success) {
+      .issue.getTransitions({ issueKey: issueKey }, function(error, success) {
         let availableTranstions = [];
         if (success) {
-          spinner.stop()
+          spinner.stop();
           success.transitions.map(t => {
             availableTranstions.push({ name: t.name, value: t.id });
           });
@@ -54,8 +68,8 @@ module.exports = {
           return cb(availableTranstions);
         }
         if (error) {
-          spinner.stop()
-          cb(error.errorMessages[0])
+          spinner.stop();
+          cb(error.errorMessages[0]);
         }
       });
   },
@@ -76,9 +90,9 @@ module.exports = {
           spinner.stop();
           consoleApi.printInfo(success);
         }
-        if(error) {
+        if (error) {
           spinner.stop();
-          consoleApi.printError(error)
+          consoleApi.printError(error);
         }
       });
   },
@@ -103,31 +117,31 @@ module.exports = {
   /**
    * Assign the issue to self i.e logged in user
    * @param issueKey
-   * @param {*} issueKey 
+   * @param {*} issueKey
    */
   assignSelf: function(issueKey) {
-    let accountId = configStore.get('accountId')
+    let accountId = configStore.get("accountId");
 
     module.exports.assignIssue({
       issueKey: issueKey,
       accountId: accountId
     });
   },
-  
+
   /**
    * Get the issue statuses of project for the given issue
-   * @param {*} issueKey 
+   * @param {*} issueKey
    */
-  getStoredTranstions(issueKey,cb) {
-    let key = issueKey.split('-')[0];
+  getStoredTranstions(issueKey, cb) {
+    let key = issueKey.split("-")[0];
     let keyPresent = configStore.get(key);
-    if(!keyPresent) {
-      module.exports.getTranstions(issueKey, function(data){
-        return cb(data)
+    if (!keyPresent) {
+      module.exports.getTranstions(issueKey, function(data) {
+        return cb(data);
       });
     } else {
-      let transitions =  configStore.get(key);
-      return cb(transitions)
+      let transitions = configStore.get(key);
+      return cb(transitions);
     }
   },
   //------------------------------COMMENTS RELATED FUNCTIONS------------------>

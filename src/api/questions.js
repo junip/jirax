@@ -3,7 +3,7 @@
  */
 const inquirer = require("inquirer");
 const issue = require("../api/issue_client");
-const consoleApi = require('./console')
+const consoleApi = require("./console");
 const credentialQuestion = [
   {
     type: "input",
@@ -39,17 +39,21 @@ module.exports = {
   },
 
   askIssueTranstions: function(issueKey, cb) {
-    issue.getStoredTranstions(issueKey, function(data){
-      if(typeof data == "string"){
+    issue.getStoredTranstions(issueKey, function(data) {
+      if (typeof data == "string") {
         return cb(data);
       } else {
-        return cb(inquirer.prompt([{
-          type: 'list',
-          name: 'transtion',
-          message: 'Please select the transtion type',
-          choices: data
-        }]))
+        return cb(
+          inquirer.prompt([
+            {
+              type: "list",
+              name: "transtion",
+              message: "Please select the transtion type",
+              choices: data
+            }
+          ])
+        );
       }
-    })
+    });
   }
 };
