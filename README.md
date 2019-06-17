@@ -9,7 +9,7 @@
 A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
 
 
-![Interface](assets/cli_help.jpg?raw=true "CLI Help Preview")
+![Interface](assets/preview.jpg?raw=true "CLI Help Preview")
 
 ### Asciicast Preview
 [![asciicast](https://asciinema.org/a/251931.png)](https://asciinema.org/a/251931)
