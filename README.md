@@ -23,8 +23,22 @@ You are required to have [Node.js](https://nodejs.org/) installed to run the cli
 
 1. Log in to [Atlassian](https://id.atlassian.com/manage/api-tokens) and generate your API TOKEN.
 2. Copy the API TOKEN
+ 
+## Install Using NPM
 
-## Using Nodejs
+You can use directly install the package   
+
+```sh
+ npm install -g jirax
+```
+
+### use the below command to get started
+
+```sh
+ npx jirax
+```
+
+## By cloning the repository
 
 Install all dependency 
 
@@ -40,6 +54,7 @@ npm install
 npm link or sudo npm link
 ```
 
+## Usages
 
 ## Login In Cli
 
