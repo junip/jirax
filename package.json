@@ -1,6 +1,6 @@
 {
   "name": "jirax",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A sample and flexible cli tool to handle JIRA activity",
   "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
@@ -35,6 +35,12 @@
   },
   "homepage": "https://github.com/junipdewan/jirax#readme",
   "devDependencies": {
+    "prettier": "1.17.1"
+  },
+  "pkg": {
+    "assets": "./node_modules/figlet/fonts/Standard.flf"
+  },
+  "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "configstore": "^4.0.0",
@@ -46,11 +52,6 @@
     "minimist": "^1.2.0",
     "open": "^6.3.0",
     "ora": "^3.4.0",
-    "pkg": "^4.4.0",
-    "prettier": "1.17.1"
-  },
-  "pkg": {
-    "assets": "./node_modules/figlet/fonts/Standard.flf"
-  },
-  "dependencies": {}
+    "pkg": "^4.4.0"
+  }
 }
