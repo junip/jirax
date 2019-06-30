@@ -3,6 +3,7 @@
  */
 const authenticate = require("../authentication");
 const util = require("../utils");
+const consoleApi = require('../api/console');
 const spinner = util.spinner({ text: "Fetching data...", spinner: "earth" });
 
 const todoJQL = "assignee = currentUser() AND status='To Do'";
@@ -48,11 +49,12 @@ module.exports = {
    * @param {*} callback
    * @return CurrentUser ToDo Issues
    */
-  myOpenIssues: function({}, callback) {
+  myOpenIssues: function(projectKey, callback) {
     spinner.start();
+    let JQL = (projectKey === true) ? todoJQL : todoJQL + ` AND project = ${projectKey}` 
     authenticate
       .currentUser()
-      .search.search({ jql: todoJQL }, function(error, response) {
+      .search.search({ jql: JQL }, function(error, response) {
         return callback(module.exports.formatIssuesData(response));
       });
   },
@@ -61,11 +63,12 @@ module.exports = {
    * @param {*} param0
    * @param {*} callback
    */
-  myInReviewIssues: function({}, callback) {
+  myInReviewIssues: function(projectKey, callback) {
     spinner.start();
+    let JQL = (projectKey === true) ? inReviewJQL : inReviewJQL + `  AND project = ${projectKey}`
     authenticate
       .currentUser()
-      .search.search({ jql: inReviewJQL }, function(error, response) {
+      .search.search({ jql: JQL }, function(error, response) {
         return callback(module.exports.formatIssuesData(response));
       });
   },
@@ -74,29 +77,30 @@ module.exports = {
    * @param {*} param0
    * @param {*} callback
    */
-  myCompletedIssues: function({}, callback) {
+  myCompletedIssues: function(projectKey, callback) {
     spinner.start();
+    let JQL = (projectKey === true) ? completedJQL : completedJQL + ` AND project = ${projectKey}`
     authenticate
       .currentUser()
-      .search.search({ jql: completedJQL }, function(error, response) {
+      .search.search({ jql: JQL }, function(error, response) {
         return callback(module.exports.formatIssuesData(response));
       });
   },
 
-  fetchMyOpenIssues: function() {
-    module.exports.myOpenIssues({}, function(response) {
+  fetchMyOpenIssues: function(projectKey) {
+    module.exports.myOpenIssues(projectKey, function(response) {
       module.exports.printIssues(response);
     });
   },
 
-  fetchMyInReviewIssues: function() {
-    module.exports.myInReviewIssues({}, function(response) {
+  fetchMyInReviewIssues: function(projectKey) {
+    module.exports.myInReviewIssues(projectKey, function(response) {
       module.exports.printIssues(response);
     });
   },
 
-  fetchMyCompletedIssues: function() {
-    module.exports.myCompletedIssues({}, function(response) {
+  fetchMyCompletedIssues: function(projectKey) {
+    module.exports.myCompletedIssues(projectKey, function(response) {
       module.exports.printIssues(response);
     });
   }

@@ -18,9 +18,9 @@ program
   .option("issues <key>", "Opens all the issue list for the given project key")
   .option("details <key>", "Prints Issue Details for Given Key")
   .option("move <key>", "Move issue from one status to another")
-  .option("list", "List of To Do issues for the current User")
-  .option("completed", "List of completed issues")
-  .option("inreview", "List of issues which are in review")
+  .option("list [projectkey]", "To Do issues for ProjectKey (optional)")
+  .option("completed [projectkey]", "Completed issues for ProjectKey (optional)")
+  .option("inreview [projectkey]", "In Review Issues for ProjectKey (optional)")
   .option("comments <key>", "Get all the comments for the issue")
   .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
   .option(
@@ -50,13 +50,13 @@ if (program.openBoard) {
   project.openRapidBoard(program.openBoard);
 }
 if (program.list) {
-  jql.fetchMyOpenIssues();
+  jql.fetchMyOpenIssues(program.list);
 }
 if (program.completed) {
-  jql.fetchMyCompletedIssues();
+  jql.fetchMyCompletedIssues(program.completed);
 }
 if (program.inreview) {
-  jql.fetchMyInReviewIssues();
+  jql.fetchMyInReviewIssues(program.inreview);
 }
 if (program.addComment) {
   issue.addComment({
