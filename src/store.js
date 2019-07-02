@@ -1,6 +1,7 @@
 /**
  * After taking input from user parse the data and validate
- * save input to configstore
+ * save input to configstore , remove the saved credentials
+ * when user opted to remove the credentials
  */
 
 const Configstore = require("configstore");
@@ -57,7 +58,27 @@ module.exports = {
     configStore.set({ encodedString: encodedString });
     configStore.set({ accountId: accountId });
     console.log(
-      chalk.green.bold("You have Logged in Successfully") + "  🍺🎉🎊"
+      chalk.green.bold("You have Logged in Successfully") + " 🍺🎉🎊🚀"
     );
+  },
+
+  /**
+   * @warning
+   * This method will remove the login credentials from System which is used to
+   * authenticate with JIRA apis
+   * Use Case -
+   * After the revoking the API key you may need to re-loggin with new JIRAX
+   * then you need to remove the STORED Credentials
+   *
+   */
+  removeCredentials: function() {
+    question.confirmRemoval().then(answers => {
+      if (answers.remove === "Yes") {
+        configStore.delete("hostname");
+        configStore.delete("encodedString");
+        print.printInfo("You Have Successfully removed the login credentials.");
+        print.printInfo("Use command jirax login");
+      }
+    });
   }
 };

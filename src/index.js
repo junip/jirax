@@ -8,6 +8,7 @@ const tablularPrint = require("./api/print_details");
 const jql = require("./api/jql_client");
 const question = require("./api/questions");
 const print = require("./api/console");
+const store = require("./store");
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
@@ -31,7 +32,11 @@ program
     "delete the comment for specific issuekey"
   )
   .option("assign-me <key>", "Assign issue to self(i.e logged in user")
-  .option("assign <key> <assignee>", "Assign issue to another user");
+  .option("assign <key> <assignee>", "Assign issue to another user")
+  .option(
+    "remove-credential",
+    "Remove the stored credentials from the System (i.e API keys)"
+  );
 program.parse(process.argv);
 
 if (process.argv.length < 3) {
@@ -116,8 +121,11 @@ switch (currentCommand) {
   case "assign-me":
     issue.assignSelf(program.assignMe);
     break;
+  case "remove-credential":
+    store.removeCredentials();
+    break;
 
   default:
-    print.printError("Unknown Command")
+    print.printError("Unknown Command");
     program.help();
 }

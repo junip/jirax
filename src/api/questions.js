@@ -32,6 +32,8 @@ const credentialQuestion = [
   }
 ];
 
+const credentialRemoveQuestion = [];
+
 module.exports = {
   // asking credential for the input from user
   askCredential: function() {
@@ -55,5 +57,18 @@ module.exports = {
         );
       }
     });
+  },
+
+  confirmRemoval: function() {
+    return inquirer.prompt([
+      {
+        type: "list",
+        name: "remove",
+        message:
+          "Are you sure? This command will remove the login credentials from system. " +
+          "You need to login again for further usages of JIRAX",
+        choices: [{ key: "Yes", value: "Yes" }, { key: "No", value: "No" }]
+      }
+    ]);
   }
 };
