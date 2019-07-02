@@ -3,7 +3,7 @@
  */
 const authenticate = require("../authentication");
 const util = require("../utils");
-const consoleApi = require('../api/console');
+const consoleApi = require("../api/console");
 const spinner = util.spinner({ text: "Fetching data...", spinner: "earth" });
 
 const todoJQL = "assignee = currentUser() AND status='To Do'";
@@ -51,7 +51,8 @@ module.exports = {
    */
   myOpenIssues: function(projectKey, callback) {
     spinner.start();
-    let JQL = (projectKey === true) ? todoJQL : todoJQL + ` AND project = ${projectKey}` 
+    let JQL =
+      projectKey === true ? todoJQL : todoJQL + ` AND project = ${projectKey}`;
     authenticate
       .currentUser()
       .search.search({ jql: JQL }, function(error, response) {
@@ -65,7 +66,10 @@ module.exports = {
    */
   myInReviewIssues: function(projectKey, callback) {
     spinner.start();
-    let JQL = (projectKey === true) ? inReviewJQL : inReviewJQL + `  AND project = ${projectKey}`
+    let JQL =
+      projectKey === true
+        ? inReviewJQL
+        : inReviewJQL + `  AND project = ${projectKey}`;
     authenticate
       .currentUser()
       .search.search({ jql: JQL }, function(error, response) {
@@ -79,7 +83,10 @@ module.exports = {
    */
   myCompletedIssues: function(projectKey, callback) {
     spinner.start();
-    let JQL = (projectKey === true) ? completedJQL : completedJQL + ` AND project = ${projectKey}`
+    let JQL =
+      projectKey === true
+        ? completedJQL
+        : completedJQL + ` AND project = ${projectKey}`;
     authenticate
       .currentUser()
       .search.search({ jql: JQL }, function(error, response) {

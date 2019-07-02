@@ -19,7 +19,10 @@ program
   .option("details <key>", "Prints Issue Details for Given Key")
   .option("move <key>", "Move issue from one status to another")
   .option("list [projectkey]", "To Do issues for ProjectKey (optional)")
-  .option("completed [projectkey]", "Completed issues for ProjectKey (optional)")
+  .option(
+    "completed [projectkey]",
+    "Completed issues for ProjectKey (optional)"
+  )
   .option("inreview [projectkey]", "In Review Issues for ProjectKey (optional)")
   .option("comments <key>", "Get all the comments for the issue")
   .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
@@ -35,73 +38,86 @@ if (process.argv.length < 3) {
   program.help();
 }
 
-if (program.login) {
-  input.signUpUser();
-}
+// getting the current executed command
+let currentCommand = program.rawArgs[2];
 
-if (program.details) {
-  tablularPrint.printIssueDetails({ issueKey: program.details });
-}
+switch (currentCommand) {
+  case "login":
+    input.signUpUser();
+    break;
 
-if (program.open) {
-  issue.openIssue(program.open);
-}
-if (program.openBoard) {
-  project.openRapidBoard(program.openBoard);
-}
-if (program.list) {
-  jql.fetchMyOpenIssues(program.list);
-}
-if (program.completed) {
-  jql.fetchMyCompletedIssues(program.completed);
-}
-if (program.inreview) {
-  jql.fetchMyInReviewIssues(program.inreview);
-}
-if (program.addComment) {
-  issue.addComment({
-    issueKey: program.addComment,
-    comment: program.args.join(" ")
-  });
-}
-if (program.comments) {
-  issue.getComments(program.comments);
-}
+  case "open-board":
+    project.openRapidBoard(program.openBoard);
+    break;
 
-if (program.deleteComment) {
-  options = {
-    issueKey: program.deleteComment,
-    commentId: program.args[0]
-  };
-  issue.deleteComment(options);
-}
+  case "open":
+    issue.openIssue(program.open);
+    break;
+  case "issues":
+    issue.openProjectIssues(program.issues);
+    break;
 
-if (program.assign) {
-  issue.assignIssue({
-    issueKey: program.assign,
-    assignee: program.args.join(" ")
-  });
-}
-// moving issue dependency
-if (program.move) {
-  question.askIssueTranstions(program.move, function(data) {
-    if (typeof data === "string") {
-      print.printError(data);
-    } else {
-      data.then(answers => {
-        issue.changeStatus({
-          issueKey: program.move,
-          transition: answers["transtion"]
+  case "details":
+    tablularPrint.printIssueDetails({ issueKey: program.details });
+    break;
+
+  case "move":
+    question.askIssueTranstions(program.move, function(data) {
+      if (typeof data === "string") {
+        print.printError(data);
+      } else {
+        data.then(answers => {
+          issue.changeStatus({
+            issueKey: program.move,
+            transition: answers["transtion"]
+          });
         });
-      });
-    }
-  });
-}
+      }
+    });
+    break;
 
-if (program.assignMe) {
-  issue.assignSelf(program.assignMe);
-}
+  case "list":
+    jql.fetchMyOpenIssues(program.list);
+    break;
+  case "completed":
+    jql.fetchMyCompletedIssues(program.completed);
+    break;
 
-if (program.issues) {
-  issue.openProjectIssues(program.issues);
+  case "inreview":
+    jql.fetchMyInReviewIssues(program.inreview);
+    break;
+
+  case "comments":
+    issue.getComments(program.comments);
+    break;
+
+  case "add-comment":
+    issue.addComment({
+      issueKey: program.addComment,
+      comment: program.args.join(" ")
+    });
+    break;
+
+  case "delete-comment":
+    options = {
+      issueKey: program.deleteComment,
+      commentId: program.args[0]
+    };
+    issue.deleteComment(options);
+    break;
+
+  case "assign":
+    issue.assignIssue({
+      issueKey: program.assign,
+      assignee: program.args.join(" ")
+    });
+    break;
+
+  case "assign-me":
+    issue.assignSelf(program.assignMe);
+    break;
+
+  default:
+    print.printError("Unknown Command")
+    program.help();
 }
