@@ -46,7 +46,7 @@ module.exports = {
     let encodedString64 = util.getEncodedString();
 
     if (!HOST_NAME) {
-      console.log("Please Loggin using your API Token");
+      console.log("Please login using your API Token");
     } else {
       var JIRA_AUTH = new jiraConnector({
         host: HOST_NAME,

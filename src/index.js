@@ -7,6 +7,7 @@ const project = require("./api/project_client");
 const tablularPrint = require("./api/print_details");
 const jql = require("./api/jql_client");
 const question = require("./api/questions");
+const util = require("./utils");
 const print = require("./api/console");
 const store = require("./store");
 
@@ -41,91 +42,96 @@ program.parse(process.argv);
 
 if (process.argv.length < 3) {
   program.help();
-}
+} else {
+  let encodedString = util.getEncodedString();
+  if (!encodedString && !program.login) {
+    return print.printInfo("Please login using command jirax login");
+  }
 
-// getting the current executed command
-let currentCommand = program.rawArgs[2];
+  // getting the current executed command
+  let currentCommand = program.rawArgs[2];
 
-switch (currentCommand) {
-  case "login":
-    input.signUpUser();
-    break;
+  switch (currentCommand) {
+    case "login":
+      input.signUpUser();
+      break;
 
-  case "open-board":
-    project.openRapidBoard(program.openBoard);
-    break;
+    case "open-board":
+      project.openRapidBoard(program.openBoard);
+      break;
 
-  case "open":
-    issue.openIssue(program.open);
-    break;
-  case "issues":
-    issue.openProjectIssues(program.issues);
-    break;
+    case "open":
+      issue.openIssue(program.open);
+      break;
+    case "issues":
+      issue.openProjectIssues(program.issues);
+      break;
 
-  case "details":
-    tablularPrint.printIssueDetails({ issueKey: program.details });
-    break;
+    case "details":
+      tablularPrint.printIssueDetails({ issueKey: program.details });
+      break;
 
-  case "move":
-    question.askIssueTranstions(program.move, function(data) {
-      if (typeof data === "string") {
-        print.printError(data);
-      } else {
-        data.then(answers => {
-          issue.changeStatus({
-            issueKey: program.move,
-            transition: answers["transtion"]
+    case "move":
+      question.askIssueTranstions(program.move, function(data) {
+        if (typeof data === "string") {
+          print.printError(data);
+        } else {
+          data.then(answers => {
+            issue.changeStatus({
+              issueKey: program.move,
+              transition: answers["transtion"]
+            });
           });
-        });
-      }
-    });
-    break;
+        }
+      });
+      break;
 
-  case "list":
-    jql.fetchMyOpenIssues(program.list);
-    break;
-  case "completed":
-    jql.fetchMyCompletedIssues(program.completed);
-    break;
+    case "list":
+      jql.fetchMyOpenIssues(program.list);
+      break;
+    case "completed":
+      jql.fetchMyCompletedIssues(program.completed);
+      break;
 
-  case "inreview":
-    jql.fetchMyInReviewIssues(program.inreview);
-    break;
+    case "inreview":
+      jql.fetchMyInReviewIssues(program.inreview);
+      break;
 
-  case "comments":
-    issue.getComments(program.comments);
-    break;
+    case "comments":
+      issue.getComments(program.comments);
+      break;
 
-  case "add-comment":
-    issue.addComment({
-      issueKey: program.addComment,
-      comment: program.args.join(" ")
-    });
-    break;
+    case "add-comment":
+      issue.addComment({
+        issueKey: program.addComment,
+        comment: program.args.join(" ")
+      });
+      break;
 
-  case "delete-comment":
-    options = {
-      issueKey: program.deleteComment,
-      commentId: program.args[0]
-    };
-    issue.deleteComment(options);
-    break;
+    case "delete-comment":
+      options = {
+        issueKey: program.deleteComment,
+        commentId: program.args[0]
+      };
+      issue.deleteComment(options);
+      break;
 
-  case "assign":
-    issue.assignIssue({
-      issueKey: program.assign,
-      assignee: program.args.join(" ")
-    });
-    break;
+    case "assign":
+      issue.assignIssue({
+        issueKey: program.assign,
+        assignee: program.args.join(" ")
+      });
+      break;
 
-  case "assign-me":
-    issue.assignSelf(program.assignMe);
-    break;
-  case "remove-credential":
-    store.removeCredentials();
-    break;
+    case "assign-me":
+      issue.assignSelf(program.assignMe);
+      break;
+    case "remove-credential":
+      store.removeCredentials();
+      break;
 
-  default:
-    print.printError("Unknown Command");
-    program.help();
+    default:
+      print.printError("Unknown Command");
+      program.help();
+  }
 }
