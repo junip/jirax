@@ -1,9 +1,18 @@
 /**
- * Taking User Input using with Question Prompt
+ * Question Prompt Module
+ *
+ * autocomplete prompt
+ * `https://github.com/mokkabonna/inquirer-autocomplete-prompt`
+ *
  */
-const inquirer = require("inquirer");
 const issue = require("../api/issue_client");
-const consoleApi = require("./console");
+const inquirer = require("inquirer");
+const autocompletePrompt = require("inquirer-autocomplete-prompt")
+inquirer.registerPrompt(
+  "autocomplete",
+  autocompletePrompt
+);
+const user = require('./user');
 const credentialQuestion = [
   {
     type: "input",
@@ -70,5 +79,35 @@ module.exports = {
         choices: [{ key: "Yes", value: "Yes" }, { key: "No", value: "No" }]
       }
     ]);
+  },
+  /**
+   * user search prompt 
+   */
+  userSearch: function() {
+    inquirer.prompt([{
+      type: 'autocomplete',
+      name: 'user',
+      pageSize: 4,
+      message: 'Search user to assign issue',
+      source: function () { return ['Arizona',
+      'Arkansas',
+      'California',
+      'Colorado',
+      'Connecticut',
+      'Delaware',
+      'District Of Columbia',
+      'Federated States Of Micronesia',
+      'Florida',
+      'Georgia',
+      'Guam',
+      'Hawaii',
+      'Idaho',
+      'Illinois',
+      'Indiana',
+      'Iowa']
+    }
+    }]).then(function(answers) {
+      console.log(answers)
+    });
   }
 };

@@ -10,6 +10,7 @@ const question = require("./api/questions");
 const util = require("./utils");
 const print = require("./api/console");
 const store = require("./store");
+const user = require('./api/user')
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
@@ -34,6 +35,7 @@ program
   )
   .option("assign-me <key>", "Assign issue to self(i.e logged in user")
   .option("assign <key> <assignee>", "Assign issue to another user")
+  .option("test", "search user")
   .option(
     "remove-credential",
     "Remove the stored credentials from the System (i.e API keys)"
@@ -117,10 +119,13 @@ if (process.argv.length < 3) {
       break;
 
     case "assign":
-      issue.assignIssue({
-        issueKey: program.assign,
-        assignee: program.args.join(" ")
-      });
+      question.userSearch(program.assign, program.args.join(" "))
+           
+
+      // issue.assignIssue({
+      //   issueKey: program.assign,
+      //   assignee: program.args.join(" ")
+      // });
       break;
 
     case "assign-me":
@@ -128,6 +133,10 @@ if (process.argv.length < 3) {
       break;
     case "remove-credential":
       store.removeCredentials();
+      break;
+
+    case "test":
+
       break;
 
     default:
