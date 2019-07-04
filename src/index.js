@@ -10,7 +10,7 @@ const question = require("./api/questions");
 const util = require("./utils");
 const print = require("./api/console");
 const store = require("./store");
-const user = require('./api/user')
+const assign = require("./assign_issue");
 
 program.version("1.0.0").description("CLI Tool for accessing JIRA");
 
@@ -34,7 +34,7 @@ program
     "delete the comment for specific issuekey"
   )
   .option("assign-me <key>", "Assign issue to self(i.e logged in user")
-  .option("assign <key> <assignee>", "Assign issue to another user")
+  .option("assign <key>", "Assign issue to another user")
   .option("test", "search user")
   .option(
     "remove-credential",
@@ -119,13 +119,7 @@ if (process.argv.length < 3) {
       break;
 
     case "assign":
-      question.userSearch(program.assign, program.args.join(" "))
-           
-
-      // issue.assignIssue({
-      //   issueKey: program.assign,
-      //   assignee: program.args.join(" ")
-      // });
+      assign.searchUser(program.assign);
       break;
 
     case "assign-me":
@@ -136,7 +130,6 @@ if (process.argv.length < 3) {
       break;
 
     case "test":
-
       break;
 
     default:

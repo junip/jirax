@@ -14,7 +14,8 @@ module.exports = {
    * @param {string} opts.username The username
    * @param {string} opts.issueKey The issue key for the issue being edited we need to find assignable users
    */
-  searchAssignableUser: function(options, cb) {
+  searchAssignableUser: function(issueKey, input, cb) {
+    let options = { issueKey: issueKey, username: input };
     auth.currentUser().user.searchAssignable(options, function(err, res) {
       let users = [];
       if (err) {
@@ -25,6 +26,7 @@ module.exports = {
         res.map(user => {
           users.push({ accountId: user.accountId, name: user.displayName });
         });
+
         return cb(users);
       }
     });
