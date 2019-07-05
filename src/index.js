@@ -33,12 +33,12 @@ program
     "delete-comment <key> <comment-id>",
     "delete the comment for specific issuekey"
   )
-  .option("assign-me <key>", "Assign issue to self(i.e logged in user")
+  .option("assign-me <key>", "Assign issue to self (i.e logged in user) ")
   .option("assign <key>", "Assign issue to another user")
   .option("test", "search user")
   .option(
-    "remove-credential",
-    "Remove the stored credentials from the System (i.e API keys)"
+    "clear",
+    "Remove the stored credentials from the System (i.e API keys etc)"
   );
 program.parse(process.argv);
 
@@ -47,7 +47,9 @@ if (process.argv.length < 3) {
 } else {
   let encodedString = util.getEncodedString();
   if (!encodedString && !program.login) {
-    return print.printInfo("Please login using command jirax login");
+    return console.log(
+      "Please login using command  " + print.chalkGreen("jirax login")
+    );
   }
 
   // getting the current executed command
@@ -125,7 +127,7 @@ if (process.argv.length < 3) {
     case "assign-me":
       issue.assignSelf(program.assignMe);
       break;
-    case "remove-credential":
+    case "clear":
       store.removeCredentials();
       break;
 

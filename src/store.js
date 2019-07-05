@@ -53,10 +53,14 @@ module.exports = {
     let hostname = data.hostname;
     let encodedString = data.encodedString;
     let accountId = data.success.accountId;
+    let username = data.success.displayName;
     let configStore = new Configstore("jiraconfig");
-    configStore.set({ hostname: hostname });
-    configStore.set({ encodedString: encodedString });
-    configStore.set({ accountId: accountId });
+    configStore.set({
+      hostname: hostname,
+      encodedString: encodedString,
+      accountId: accountId,
+      username: username
+    });
     console.log(
       chalk.green.bold("You have Logged in Successfully") + " 🍺🎉🎊🚀"
     );
@@ -74,10 +78,9 @@ module.exports = {
   removeCredentials: function() {
     question.confirmRemoval().then(answers => {
       if (answers.remove === "Yes") {
-        configStore.delete("hostname");
-        configStore.delete("encodedString");
+        configStore.clear();
         print.printInfo("You Have Successfully removed the login credentials.");
-        print.printInfo("Use command jirax login");
+        print.printInfo("Use command jirax login for login");
       }
     });
   }

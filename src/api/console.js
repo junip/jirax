@@ -18,6 +18,10 @@ module.exports = {
     return chalk.hex("#5e6c84").bold(`${message}`);
   },
 
+  chalkRed: function(message) {
+    return chalk.red.bold(`${message}`);
+  },
+
   chalkGreen: function(message) {
     return chalk.green.bold(`${message}`);
   },

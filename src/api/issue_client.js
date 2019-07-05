@@ -87,8 +87,21 @@ module.exports = {
       .currentUser()
       .issue.transitionIssue(object, function(error, success) {
         if (success) {
+          let key = object.issueKey.split("-")[0];
+
+          let transitionName = configStore.get(key).filter(el => {
+            if (el.value === object.transition) {
+              return el.name;
+            }
+          });
+
+          let message = `${consoleApi.chalkRed(
+            object.issueKey
+          )} is transitioned to ${consoleApi.chalkGreen(
+            transitionName[0].name
+          )}`;
           spinner.stop();
-          consoleApi.printInfo(success);
+          console.log(message);
         }
         if (error) {
           spinner.stop();
@@ -97,8 +110,14 @@ module.exports = {
       });
   },
 
-  assignIssue: function(options) {
-    let spinner = util.spinner(`Assigning the issue`);
+  assignIssue: function(issueKey, accountId, username) {
+    let options = {
+      issueKey: issueKey,
+      accountId: accountId
+    };
+    let spinner = util.spinner(
+      `Assigning the issue ${issueKey} to ${username}`
+    );
     spinner.start();
     authenticate
       .currentUser()
@@ -110,7 +129,12 @@ module.exports = {
           consoleApi.printError("Issue Cannnot be assigned");
         }
         if (success) {
-          consoleApi.printInfo(success);
+          let message = `Issue ${consoleApi.chalkRed(
+            issueKey
+          )} ${consoleApi.chalkGreen(
+            "is assigned to"
+          )} ${consoleApi.printbgCyan(username)}`;
+          consoleApi.printInfo(message);
         }
       });
   },
@@ -121,11 +145,9 @@ module.exports = {
    */
   assignSelf: function(issueKey) {
     let accountId = configStore.get("accountId");
+    let username = configStore.get("username");
 
-    module.exports.assignIssue({
-      issueKey: issueKey,
-      accountId: accountId
-    });
+    module.exports.assignIssue(issueKey, accountId, username);
   },
 
   /**

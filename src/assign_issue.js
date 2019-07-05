@@ -76,16 +76,17 @@ module.exports = {
       }
     };
     var fuzzyResult = fuzzy.filter(username, fetchedUsersArray, options);
+    /**
+     * @returns ['accountId'] of the selected User
+     */
     let accountId = fuzzyResult.map(function(el) {
       return el.original.accountId;
     });
 
     /**
      * finally assign the issue to the selected user expected format.
+     * { }
      */
-    issue.assignIssue({
-      issueKey: issueKey,
-      accountId: accountId[0]
-    });
+    issue.assignIssue(issueKey, accountId[0], username);
   }
 };
