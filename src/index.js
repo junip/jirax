@@ -17,24 +17,24 @@ program.version("1.0.0").description("CLI Tool for accessing JIRA");
 program
   .option("-l, login", "Login Using JIRA API Token")
   .option("-r, open-board <key>", "Open Rapid Board for the Given Project Key")
-  .option("open <key>", "Open specific issue for the given issuekey")
-  .option("issues <key>", "Opens all the issue list for the given project key")
-  .option("details <key>", "Prints Issue Details for Given Key")
-  .option("move <key>", "Move issue from one status to another")
+  .option("open <issue>", "Open specific issue for the given issue")
+  .option("issues <project-key>", "Opens all the issue list for the given project key")
+  .option("details <issue>", "Prints Issue Details for Given Issue")
+  .option("move <issue>", "Move issue from one status to another")
   .option("list [projectkey]", "To Do issues for ProjectKey (optional)")
   .option(
     "completed [projectkey]",
     "Completed issues for ProjectKey (optional)"
   )
   .option("inreview [projectkey]", "In Review Issues for ProjectKey (optional)")
-  .option("comments <key>", "Get all the comments for the issue")
-  .option("add-comment <key> <comment>", "Add Comment to the Given Issues")
+  .option("comments <issue>", "Get all the comments for the issue")
+  .option("add-comment <issue> <comment>", "Add Comment to the Given Issues")
   .option(
-    "delete-comment <key> <comment-id>",
-    "delete the comment for specific issuekey"
+    "delete-comment <issue> <comment-id>",
+    "delete the comment for specific Issue ID"
   )
-  .option("assign-me <key>", "Assign issue to self (i.e logged in user) ")
-  .option("assign <key>", "Assign issue to another user")
+  .option("assign-me <issue>", "Assign issue to self (i.e logged in user) ")
+  .option("assign <issue>", "Assign issue to another user")
   .option(
     "clear",
     "Remove the stored credentials from the System (i.e API keys etc)"
