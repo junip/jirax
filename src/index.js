@@ -35,7 +35,6 @@ program
   )
   .option("assign-me <key>", "Assign issue to self (i.e logged in user) ")
   .option("assign <key>", "Assign issue to another user")
-  .option("test", "search user")
   .option(
     "clear",
     "Remove the stored credentials from the System (i.e API keys etc)"
@@ -138,10 +137,6 @@ if (process.argv.length < 3) {
     case "clear":
       store.removeCredentials();
       break;
-
-    case "test":
-      break;
-
     default:
       print.printError("Unknown Command");
       program.help();

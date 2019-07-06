@@ -81,7 +81,7 @@ module.exports = {
    * @param {*} object
    */
   changeStatus: function(object) {
-    let spinner = util.spinner("Changing transtion...");
+    let spinner = util.spinner("Changing status...");
     spinner.start();
     authenticate
       .currentUser()

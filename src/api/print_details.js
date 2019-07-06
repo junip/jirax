@@ -9,11 +9,7 @@ const spinner = util.spinner({ text: "Loading details..", spinner: "moon" });
 
 module.exports = {
   printInConsole(issue) {
-    console.log(
-      consoleApi.printBgGreenBright(
-        "---------------------------------------------------------------------------\n\n"
-      )
-    );
+    consoleApi.printInfo(`Details for ${issue.key}\n`);
 
     console.log(`## Summary: ${issue.summary}\n`);
 
@@ -26,7 +22,7 @@ module.exports = {
     console.log(
       `## Type: ${
         issue.issueType
-      }                                                  ## Reporter - ${
+      }                                                       ## Reporter - ${
         issue.reporterName
       } \n`
     );
@@ -55,13 +51,7 @@ module.exports = {
       )} \n`
     );
 
-    console.log(`${issue.description}\n\n`);
-
-    console.log(
-      consoleApi.printBgGreenBright(
-        "---------------------------------------------------------------------------\n\n"
-      )
-    );
+    console.log(`${issue.description}\n`);
   },
 
   /**
