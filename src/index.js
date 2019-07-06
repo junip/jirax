@@ -60,7 +60,15 @@ if (process.argv.length < 3) {
       input.signUpUser();
       break;
 
+    case "-l":
+      input.signUpUser();
+      break;
+
     case "open-board":
+      project.openRapidBoard(program.openBoard);
+      break;
+
+    case "-r":
       project.openRapidBoard(program.openBoard);
       break;
 
