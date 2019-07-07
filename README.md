@@ -8,7 +8,8 @@
 
 
 
-A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
+A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool. Manage all jira related things from CLI itself. i.e move issues , assign issues to another jira user
+instantly using this tool. 
 
 
 ![Interface](assets/terminal.png?raw=true "CLI Help Preview")

@@ -3,7 +3,7 @@
  */
 const authenticate = require("../authentication");
 const util = require("../utils");
-const consoleApi = require("../api/console");
+const consoleApi = require("./console");
 const spinner = util.spinner({ text: "Fetching data...", spinner: "earth" });
 
 const todoJQL = "assignee = currentUser() AND status='To Do'";
