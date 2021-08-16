@@ -1,12 +1,13 @@
 /**
  * Used to connect JIRA issue APIS
  */
-const authenticate = require("../authentication");
-const open = require("open");
-const util = require("../utils");
-const consoleApi = require("../api/console");
-const Configstore = require("configstore");
-const configStore = new Configstore("jiraconfig");
+const open = require('open');
+const Configstore = require('configstore');
+const authenticate = require('../authentication');
+const util = require('../utility/utils');
+const consoleApi = require('../utility/console');
+
+const configStore = new Configstore('jiraconfig');
 
 module.exports = {
   /**
@@ -14,11 +15,11 @@ module.exports = {
    * Note that this object must contain EITHER an issueId or issueKey
    * issueKey - 'TEST-12' or issueId
    */
-  getIssue: function(issueKey, callback) {
+  getIssue(issueKey, callback) {
     authenticate
       .currentUser()
-      .issue.getIssue(issueKey, function(error, success) {
-        let data = success ? success : error;
+      .issue.getIssue(issueKey, (error, success) => {
+        const data = success || error;
         return callback(data);
       });
   },
@@ -27,9 +28,9 @@ module.exports = {
    * hostname/browse/issuekey
    * @issueKey
    */
-  openIssue: function(issueKey) {
-    let hostName = util.getHostName();
-    let URL = `https://${hostName}/browse/${issueKey}`;
+  openIssue(issueKey) {
+    const hostName = util.getHostName();
+    const URL = `https://${hostName}/browse/${issueKey}`;
     open(URL);
   },
 
@@ -38,9 +39,9 @@ module.exports = {
    *
    * @param {*} projectKey
    */
-  openProjectIssues: function(projectKey) {
-    let hostName = util.getHostName();
-    let URL = `https://${hostName}/projects/${projectKey}/issues`;
+  openProjectIssues(projectKey) {
+    const hostName = util.getHostName();
+    const URL = `https://${hostName}/projects/${projectKey}/issues`;
     open(URL);
   },
   /**
@@ -48,20 +49,20 @@ module.exports = {
    * @param options.issuekey isssue keys to which this
    * @param {*} options
    */
-  getTranstions: function(issueKey, cb) {
-    let key = issueKey.split("-")[0];
-    let spinner = util.spinner({
-      text: "Fetching available transtions...",
-      spinner: "earth"
+  getTranstions(issueKey, cb) {
+    const key = issueKey.split('-')[0];
+    const spinner = util.spinner({
+      text: 'Fetching available transtions...',
+      spinner: 'earth',
     });
     spinner.start();
     authenticate
       .currentUser()
-      .issue.getTransitions({ issueKey: issueKey }, function(error, success) {
-        let availableTranstions = [];
+      .issue.getTransitions({ issueKey }, (error, success) => {
+        const availableTranstions = [];
         if (success) {
           spinner.stop();
-          success.transitions.map(t => {
+          success.transitions.map((t) => {
             availableTranstions.push({ name: t.name, value: t.id });
           });
           configStore.set(key, availableTranstions);
@@ -80,25 +81,25 @@ module.exports = {
    * @param{String} object.issueKey - issuekey for which issue transtion happen
    * @param {*} object
    */
-  changeStatus: function(object) {
-    let spinner = util.spinner("Changing status...");
+  changeStatus(object) {
+    const spinner = util.spinner('Changing status...');
     spinner.start();
     authenticate
       .currentUser()
-      .issue.transitionIssue(object, function(error, success) {
+      .issue.transitionIssue(object, (error, success) => {
         if (success) {
-          let key = object.issueKey.split("-")[0];
+          const key = object.issueKey.split('-')[0];
 
-          let transitionName = configStore.get(key).filter(el => {
+          const transitionName = configStore.get(key).filter((el) => {
             if (el.value === object.transition) {
               return el.name;
             }
           });
 
-          let message = `${consoleApi.chalkRed(
-            object.issueKey
+          const message = `${consoleApi.chalkRed(
+            object.issueKey,
           )} is transitioned to ${consoleApi.chalkGreen(
-            transitionName[0].name
+            transitionName[0].name,
           )}`;
           spinner.stop();
           console.log(message);
@@ -110,29 +111,29 @@ module.exports = {
       });
   },
 
-  assignIssue: function(issueKey, accountId, username) {
-    let options = {
-      issueKey: issueKey,
-      accountId: accountId
+  assignIssue(issueKey, accountId, username) {
+    const options = {
+      issueKey,
+      accountId,
     };
-    let spinner = util.spinner(
-      `Assigning the issue ${issueKey} to ${username}`
+    const spinner = util.spinner(
+      `Assigning the issue ${issueKey} to ${username}`,
     );
     spinner.start();
     authenticate
       .currentUser()
-      .issue.assignIssue(options, function(error, success) {
+      .issue.assignIssue(options, (error, success) => {
         if (success || error) {
           spinner.stop();
         }
         if (error) {
-          consoleApi.printError("Issue Cannnot be assigned");
+          consoleApi.printError('Issue Cannnot be assigned');
         }
         if (success) {
-          let message = `Issue ${consoleApi.chalkRed(
-            issueKey
+          const message = `Issue ${consoleApi.chalkRed(
+            issueKey,
           )} ${consoleApi.chalkGreen(
-            "is assigned to"
+            'is assigned to',
           )} ${consoleApi.printbgCyan(username)}`;
           consoleApi.printInfo(message);
         }
@@ -143,9 +144,9 @@ module.exports = {
    * @param issueKey
    * @param {*} issueKey
    */
-  assignSelf: function(issueKey) {
-    let accountId = configStore.get("accountId");
-    let username = configStore.get("username");
+  assignSelf(issueKey) {
+    const accountId = configStore.get('accountId');
+    const username = configStore.get('username');
 
     module.exports.assignIssue(issueKey, accountId, username);
   },
@@ -155,35 +156,33 @@ module.exports = {
    * @param {*} issueKey
    */
   getStoredTranstions(issueKey, cb) {
-    let key = issueKey.split("-")[0];
-    let keyPresent = configStore.get(key);
+    const key = issueKey.split('-')[0];
+    const keyPresent = configStore.get(key);
     if (!keyPresent) {
-      module.exports.getTranstions(issueKey, function(data) {
-        return cb(data);
-      });
+      module.exports.getTranstions(issueKey, (data) => cb(data));
     } else {
-      let transitions = configStore.get(key);
+      const transitions = configStore.get(key);
       return cb(transitions);
     }
   },
-  //------------------------------COMMENTS RELATED FUNCTIONS------------------>
+  // ------------------------------COMMENTS RELATED FUNCTIONS------------------>
   /** Add comment to the issue
    * { issueKey: 'SFMAC-19', comment: 'some comment'"}
    * @param {*} options
    */
-  addComment: function(options) {
-    let spinner = util.spinner("Posting your comment. Please wait");
+  addComment(options) {
+    const spinner = util.spinner('Posting your comment. Please wait');
     spinner.start();
     authenticate
       .currentUser()
-      .issue.addComment(options, function(error, response) {
+      .issue.addComment(options, (error, response) => {
         if (response) {
           spinner.stop();
-          consoleApi.printInfo("Comment added successfully");
+          consoleApi.printInfo('Comment added successfully');
         }
         if (error) {
           spinner.stop();
-          consoleApi.printError("No issue with mentioned key found");
+          consoleApi.printError('No issue with mentioned key found');
         }
       });
   },
@@ -191,25 +190,25 @@ module.exports = {
    * Get all the comments for the specific issue
    * @param {*} issueKey
    */
-  getComments: function(issueKey) {
-    let spinner = util.spinner({
-      text: "Fetching data...",
-      spinner: "earth"
+  getComments(issueKey) {
+    const spinner = util.spinner({
+      text: 'Fetching data...',
+      spinner: 'earth',
     });
     spinner.start();
     authenticate
       .currentUser()
-      .issue.getComments({ issueKey: issueKey }, function(error, response) {
+      .issue.getComments({ issueKey }, (error, response) => {
         if (response) {
           spinner.stop();
           if (response.comments.length === 0) {
-            consoleApi.printInfo("No Comments Found");
+            consoleApi.printInfo('No Comments Found');
           } else {
-            response.comments.map(comment => {
+            response.comments.map((comment) => {
               console.log(
                 `${comment.id} ${consoleApi.chalkGreen(
-                  comment.author.displayName.split(" ")[0]
-                )} ${comment.body} \n`
+                  comment.author.displayName.split(' ')[0],
+                )} ${comment.body} \n`,
               );
             });
           }
@@ -223,20 +222,20 @@ module.exports = {
    * @param {string} opts.commentId The id of the comment.
    * @param {*} opts
    */
-  deleteComment: function(opts) {
-    let spinner = util.spinner("Deleting comment .....");
+  deleteComment(opts) {
+    const spinner = util.spinner('Deleting comment .....');
     spinner.start();
     authenticate
       .currentUser()
-      .issue.deleteComment(opts, function(error, response) {
+      .issue.deleteComment(opts, (error, response) => {
         if (error) {
           spinner.stop();
-          consoleApi.printError("Error while deleting the comment");
+          consoleApi.printError('Error while deleting the comment');
         }
         if (response) {
           spinner.stop();
-          consoleApi.printInfo("Comment deleted");
+          consoleApi.printInfo('Comment deleted');
         }
       });
-  }
+  },
 };

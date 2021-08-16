@@ -3,8 +3,8 @@
 const program = require('commander');
 const input = require('./store');
 
-const util = require('./utils');
-const print = require('./api/console');
+const util = require('./utility/utils');
+const print = require('./utility/console');
 const { loadBoardCommands } = require('./commands/boards');
 
 program.version('1.0.0').description('CLI Tool for accessing JIRA');

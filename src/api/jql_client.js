@@ -1,10 +1,11 @@
 /**
  * JIRA Apis response with jira JQL custom quesry search
  */
-const authenticate = require("../authentication");
-const util = require("../utils");
-const consoleApi = require("../api/console");
-const spinner = util.spinner({ text: "Fetching data...", spinner: "earth" });
+const authenticate = require('../authentication');
+const util = require('../utility/utils');
+const consoleApi = require('../utility/console');
+
+const spinner = util.spinner({ text: 'Fetching data...', spinner: 'earth' });
 
 const todoJQL = "assignee = currentUser() AND status='To Do'";
 const completedJQL = "assignee = currentUser() AND status='Done'";
@@ -17,13 +18,11 @@ module.exports = {
       spinner.stop();
     }
     if (response.issues.length) {
-      issues = response.issues.map(issue => {
-        return {
-          key: issue.key,
-          summary: issue.fields.summary,
-          type: issue.fields.issuetype.name
-        };
-      });
+      issues = response.issues.map((issue) => ({
+        key: issue.key,
+        summary: issue.fields.summary,
+        type: issue.fields.issuetype.name,
+      }));
     }
     return issues;
   },
@@ -32,15 +31,15 @@ module.exports = {
    * Print the issue listing in a proper format
    * @param {*} issues
    */
-  printIssues: function(issues) {
+  printIssues(issues) {
     if (issues) {
-      issues.map(issue => {
+      issues.map((issue) => {
         console.log(
-          `${issue.key} ${util.setIssueColor(issue.type)} ${issue.summary} \n`
+          `${issue.key} ${util.setIssueColor(issue.type)} ${issue.summary} \n`,
         );
       });
     } else {
-      consoleApi.printInfo("No issues found");
+      consoleApi.printInfo('No issues found');
     }
   },
   /**
@@ -49,66 +48,57 @@ module.exports = {
    * @param {*} callback
    * @return CurrentUser ToDo Issues
    */
-  myOpenIssues: function(projectKey, callback) {
+  myOpenIssues(projectKey, callback) {
     spinner.start();
-    let JQL =
-      projectKey === true ? todoJQL : todoJQL + ` AND project = ${projectKey}`;
+    const JQL = projectKey === true ? todoJQL : `${todoJQL} AND project = ${projectKey}`;
     authenticate
       .currentUser()
-      .search.search({ jql: JQL }, function(error, response) {
-        return callback(module.exports.formatIssuesData(response));
-      });
+      .search.search({ jql: JQL }, (error, response) => callback(module.exports.formatIssuesData(response)));
   },
   /**
    * @return current user issues which are in review
    * @param {*} param0
    * @param {*} callback
    */
-  myInReviewIssues: function(projectKey, callback) {
+  myInReviewIssues(projectKey, callback) {
     spinner.start();
-    let JQL =
-      projectKey === true
-        ? inReviewJQL
-        : inReviewJQL + `  AND project = ${projectKey}`;
+    const JQL = projectKey === true
+      ? inReviewJQL
+      : `${inReviewJQL}  AND project = ${projectKey}`;
     authenticate
       .currentUser()
-      .search.search({ jql: JQL }, function(error, response) {
-        return callback(module.exports.formatIssuesData(response));
-      });
+      .search.search({ jql: JQL }, (error, response) => callback(module.exports.formatIssuesData(response)));
   },
   /**
    * @return Current User completed issues list
    * @param {*} param0
    * @param {*} callback
    */
-  myCompletedIssues: function(projectKey, callback) {
+  myCompletedIssues(projectKey, callback) {
     spinner.start();
-    let JQL =
-      projectKey === true
-        ? completedJQL
-        : completedJQL + ` AND project = ${projectKey}`;
+    const JQL = projectKey === true
+      ? completedJQL
+      : `${completedJQL} AND project = ${projectKey}`;
     authenticate
       .currentUser()
-      .search.search({ jql: JQL }, function(error, response) {
-        return callback(module.exports.formatIssuesData(response));
-      });
+      .search.search({ jql: JQL }, (error, response) => callback(module.exports.formatIssuesData(response)));
   },
 
-  fetchMyOpenIssues: function(projectKey) {
-    module.exports.myOpenIssues(projectKey, function(response) {
+  fetchMyOpenIssues(projectKey) {
+    module.exports.myOpenIssues(projectKey, (response) => {
       module.exports.printIssues(response);
     });
   },
 
-  fetchMyInReviewIssues: function(projectKey) {
-    module.exports.myInReviewIssues(projectKey, function(response) {
+  fetchMyInReviewIssues(projectKey) {
+    module.exports.myInReviewIssues(projectKey, (response) => {
       module.exports.printIssues(response);
     });
   },
 
-  fetchMyCompletedIssues: function(projectKey) {
-    module.exports.myCompletedIssues(projectKey, function(response) {
+  fetchMyCompletedIssues(projectKey) {
+    module.exports.myCompletedIssues(projectKey, (response) => {
       module.exports.printIssues(response);
     });
-  }
+  },
 };

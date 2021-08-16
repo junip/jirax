@@ -2,34 +2,35 @@
  * Search user autocompleted and find the user
  */
 
-const inquirer = require("inquirer");
-const autocompletePrompt = require("inquirer-autocomplete-prompt");
-inquirer.registerPrompt("autocomplete", autocompletePrompt);
-const fuzzy = require("fuzzy");
-const user = require("./api/user");
-const issue = require("./api/issue_client");
+const inquirer = require('inquirer');
+const autocompletePrompt = require('inquirer-autocomplete-prompt');
 
-var issueKey;
-var fetchedUsersArray;
+inquirer.registerPrompt('autocomplete', autocompletePrompt);
+const fuzzy = require('fuzzy');
+const user = require('./api/user');
+const issue = require('./api/issue_client');
+
+let issueKey;
+let fetchedUsersArray;
 
 module.exports = {
   /**
    * prompt user search option to assign issue
    * @param {*} issue
    */
-  searchUser: function(issue) {
+  searchUser(issue) {
     issueKey = issue;
     inquirer
       .prompt([
         {
-          type: "autocomplete",
-          name: "name",
-          message: "Please search for the user to assign",
+          type: 'autocomplete',
+          name: 'name',
+          message: 'Please search for the user to assign',
           source: module.exports.searchUsers,
-          pageSize: 5
-        }
+          pageSize: 5,
+        },
       ])
-      .then(function(answers) {
+      .then((answers) => {
         // assign the issue to selected user
         module.exports.findAccountAndAssign(answers.name);
       });
@@ -41,21 +42,19 @@ module.exports = {
    * @param {*} input
    * @returns Name of available users
    */
-  searchUsers: function(answers, input) {
-    input = input || "";
-    var names = [];
-    user.searchAssignableUser(issueKey, input, function(response) {
+  searchUsers(answers, input) {
+    input = input || '';
+    const names = [];
+    user.searchAssignableUser(issueKey, input, (response) => {
       fetchedUsersArray = response;
-      response.map(el => names.push(el.name));
+      response.map((el) => names.push(el.name));
     });
 
-    return new Promise(function(resolve) {
-      setTimeout(function() {
-        var fuzzyResult = fuzzy.filter(input, names);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const fuzzyResult = fuzzy.filter(input, names);
         resolve(
-          fuzzyResult.map(function(el) {
-            return el.original;
-          })
+          fuzzyResult.map((el) => el.original),
         );
       }, 2000);
     });
@@ -64,29 +63,27 @@ module.exports = {
    * Assign the issue for the selected user
    * @param {*} username
    */
-  findAccountAndAssign: function(username) {
-    var options = {
+  findAccountAndAssign(username) {
+    const options = {
       /**
        *  Each element in fetchedUsersArray array is an object, not a string.
        *  We can pass in a function that is called on each element in the array to
        *  extract the name to fuzzy search against. In this case, element.name
        */
-      extract: function(el) {
+      extract(el) {
         return el.name;
-      }
+      },
     };
-    var fuzzyResult = fuzzy.filter(username, fetchedUsersArray, options);
+    const fuzzyResult = fuzzy.filter(username, fetchedUsersArray, options);
     /**
      * @returns ['accountId'] of the selected User
      */
-    let accountId = fuzzyResult.map(function(el) {
-      return el.original.accountId;
-    });
+    const accountId = fuzzyResult.map((el) => el.original.accountId);
 
     /**
      * finally assign the issue to the selected user expected format.
      * { }
      */
     issue.assignIssue(issueKey, accountId[0], username);
-  }
+  },
 };
