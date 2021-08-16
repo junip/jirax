@@ -2,10 +2,11 @@
  * Print the response in tabular format
  */
 
-const issue = require("./issue_client");
-const consoleApi = require("../api/console");
-const util = require("../utils");
-const spinner = util.spinner({ text: "Loading details..", spinner: "moon" });
+const issue = require('./issue_client');
+const consoleApi = require('../utility/console');
+const util = require('../utility/utils');
+
+const spinner = util.spinner({ text: 'Loading details..', spinner: 'moon' });
 
 module.exports = {
   printInConsole(issue) {
@@ -16,7 +17,7 @@ module.exports = {
     console.log(
       `## ${issue.key}                        Status: ${
         issue.status
-      }                    ## Assignee - ${issue.assigneeName} \n`
+      }                    ## Assignee - ${issue.assigneeName} \n`,
     );
 
     console.log(
@@ -24,31 +25,31 @@ module.exports = {
         issue.issueType
       }                                                       ## Reporter - ${
         issue.reporterName
-      } \n`
+      } \n`,
     );
 
     console.log(
       `## Priority: ${
         issue.priority
       }                                                ## Created  - ${util.formatDate(
-        issue.created
-      )} \n`
+        issue.created,
+      )} \n`,
     );
 
     console.log(
       `## Environment: ${
-        issue.environment ? issue.environment : "Not Present       "
+        issue.environment ? issue.environment : 'Not Present       '
       }                                 ## Updated  -  ${util.formatDate(
-        issue.updated
-      )} \n`
+        issue.updated,
+      )} \n`,
     );
 
     console.log(
       `## ${consoleApi.printbgBlueBright(
-        "Description"
+        'Description',
       )}                                                     ## Resolved - ${util.formatDate(
-        issue.resolved
-      )} \n`
+        issue.resolved,
+      )} \n`,
     );
 
     console.log(`${issue.description}\n`);
@@ -58,10 +59,10 @@ module.exports = {
    * Print the issue details
    * @param {issueKey: 'SFMAC-165'}
    */
-  printIssueDetails: function(issueObject) {
+  printIssueDetails(issueObject) {
     spinner.start();
     // find and print in the console
-    issue.getIssue(issueObject, function(response) {
+    issue.getIssue(issueObject, (response) => {
       if (response) {
         spinner.stop();
       }
@@ -78,9 +79,9 @@ module.exports = {
         priority: response.fields.priority.name,
         created: response.fields.created,
         updated: response.fields.updated,
-        resolved: response.fields.resolved
+        resolved: response.fields.resolved,
       };
       module.exports.printInConsole(issueObject);
     });
-  }
+  },
 };

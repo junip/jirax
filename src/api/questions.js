@@ -23,7 +23,7 @@ const credentialQuestion = [
     name: 'api_token',
     message: 'Your API Token',
     mask: '*',
-    validate: (value) => (value.length ? true : 'Please Enter Your API Token')
+    validate: (value) => (value.length ? true : 'Please Enter Your API Token'),
   },
 ];
 
@@ -55,9 +55,9 @@ module.exports = {
       type: 'list',
       name: 'remove',
       message:
-        'Are you sure? This command will remove the login credentials from system. ' +
-        'You need to login again for further usages of JIRAX',
-      choices: [{ key: 'Yes', value: 'Yes' }, { key: 'No', value: 'No' }]
+        'Are you sure? This command will remove the login credentials from system. '
+        + 'You need to login again for further usages of JIRAX',
+      choices: [{ key: 'Yes', value: 'Yes' }, { key: 'No', value: 'No' }],
     },
   ]),
 };
