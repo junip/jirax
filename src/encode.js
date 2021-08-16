@@ -7,15 +7,13 @@
  *
  */
 
-"use strict";
-
 module.exports = {
-  encodeToBase64: function(config) {
-    let USER_NAME = config.user_name;
-    let USER_API_TOKEN = config.api_token;
-    let STRING_FORMAT = USER_NAME + ":" + USER_API_TOKEN;
+  encodeToBase64(config) {
+    const USER_NAME = config.user_name;
+    const USER_API_TOKEN = config.api_token;
+    const STRING_FORMAT = `${USER_NAME}:${USER_API_TOKEN}`;
     // encode the string to BASE64
-    let base64EncodedData = Buffer.from(STRING_FORMAT).toString("base64");
+    const base64EncodedData = Buffer.from(STRING_FORMAT).toString('base64');
     return base64EncodedData;
-  }
+  },
 };

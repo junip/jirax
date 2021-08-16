@@ -1,32 +1,37 @@
 /**
  * This module contains command sub-command related to JIRA board
  */
-
 const program = require('commander');
-
+const { openMyboard } = require('../operations/boards');
 
 exports.loadBoardCommands = () => {
   const openBoardCommand = program
     .command('board')
-    .description('Select & Open Available JIRA Board')
+    .description('jira board activity')
     .action(() => {
-      // TODO - search board API integrations
-      // project.openBoard();
+      // show the available board commands
+      openBoardCommand.help();
     });
 
   /**
-   * Opens The JIRA Board that You had Set as Default.
+   * Opens The JIRA Board that You had Set as Default with your assigned tasks.
    */
   openBoardCommand.command('mine')
+    .description('Opens your default JIRA board with with your assigned tasks')
+    .action(() => {
+      openMyboard(true);
+    });
+
+  openBoardCommand.command('show')
     .description('Opens The JIRA Board that You had Set as Default.')
     .action(() => {
-      // open default board
+      openMyboard(false);
     });
 
   // Set Your Default JIRA Board so that you can open it directly
-  openBoardCommand.command('set <nameofboard>')
+  openBoardCommand.command('set <boardname>')
     .description('Set Your Default JIRA Board')
-    .action((source, argument) => {
+    .action(() => {
       // select from the default board if present
       // if not then open board with selected my profile
     });

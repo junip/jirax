@@ -4,39 +4,40 @@
  * when user opted to remove the credentials
  */
 
-const Configstore = require("configstore");
-const configStore = new Configstore("jiraconfig");
-const jira = require("./authentication");
-const print = require("./api/console");
-const chalk = require("chalk");
-const question = require("./api/questions");
-const util = require("./utils");
-const spinner = util.spinner(" Authenticating...");
+const Configstore = require('configstore');
+// apis
+const jira = require('./authentication');
+const print = require('./api/console');
+const question = require('./api/questions');
+const util = require('./utils');
+
+const configStore = new Configstore('jiraconfig');
+const spinner = util.spinner('Authenticating...');
 /**
  * Verify the user and save the object
  * @config object
  */
 module.exports = {
-  signUpUser: function() {
-    let isLoggedIn = configStore.get("encodedString");
+  signUpUser: () => {
+    const isLoggedIn = configStore.get('encodedString');
     if (!isLoggedIn) {
-      question.askCredential().then(answers => {
+      question.askCredential().then((answers) => {
         spinner.start();
         module.exports.verifyAndSave(answers);
       });
     } else {
-      print.printInfo("You are already logged in");
+      print.printInfo('You are already logged in');
     }
   },
 
-  verifyAndSave: function(config) {
+  verifyAndSave: (config) => {
     // authenticate and save the inputs in config store
-    jira.authenticate(config, function(data) {
+    jira.authenticate(config, (data) => {
       if (data) {
         spinner.stop();
       }
       if (data.error) {
-        print.printError("Unauthorized - Please re-enter your credentials");
+        print.printError('Unauthorized - Please re-enter your credentials');
       } else {
         module.exports.storeInfo(data);
       }
@@ -46,24 +47,20 @@ module.exports = {
    * Store user data after authentication
    * @param {*} data
    */
-  storeInfo: function(data) {
-    let message = data.success.displayName.split(" ")[0];
+  storeInfo: (data) => {
+    const message = data.success.displayName.split(' ')[0];
     print.printFigletYellow(`Hi ${message}`);
     // saving the data
-    let hostname = data.hostname;
-    let encodedString = data.encodedString;
-    let accountId = data.success.accountId;
-    let username = data.success.displayName;
-    let configStore = new Configstore("jiraconfig");
+    const { hostname, encodedString, success } = data;
+    const { accountId, username } = success;
+
     configStore.set({
-      hostname: hostname,
-      encodedString: encodedString,
-      accountId: accountId,
-      username: username
+      hostname,
+      encodedString,
+      accountId,
+      username,
     });
-    console.log(
-      chalk.green.bold("You have Logged in Successfully") + " 🍺🎉🎊🚀"
-    );
+    print.printInfo('You have Logged in Successfully  🍺🎉🎊🚀');
   },
 
   /**
@@ -75,13 +72,13 @@ module.exports = {
    * then you need to remove the STORED Credentials
    *
    */
-  removeCredentials: function() {
-    question.confirmRemoval().then(answers => {
-      if (answers.remove === "Yes") {
+  removeCredentials: () => {
+    question.confirmRemoval().then((answers) => {
+      if (answers.remove === 'Yes') {
         configStore.clear();
-        print.printInfo("You Have Successfully removed the login credentials.");
-        print.printInfo("Use command jirax login for login");
+        print.printInfo('You Have Successfully removed the login credentials.');
+        print.printInfo('Use command jirax login for login');
       }
     });
-  }
+  },
 };
