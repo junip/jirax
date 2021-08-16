@@ -5,7 +5,7 @@
   "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
   "bin": {
-    "jirax": "./src/index.js"
+    "jira": "./src/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -50,9 +50,10 @@
     "inquirer": "^6.3.1",
     "inquirer-autocomplete-prompt": "^1.0.1",
     "jira-connector": "^2.14.0",
+    "jira.js": "^2.5.1",
     "log-update": "^3.2.0",
     "minimist": "^1.2.0",
-    "open": "^6.3.0",
+    "open": "^8.2.1",
     "ora": "^3.4.0",
     "pkg": "^4.4.0"
   }
