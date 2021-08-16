@@ -7,9 +7,9 @@
 const Configstore = require('configstore');
 // apis
 const jira = require('./authentication');
-const print = require('./api/console');
+const print = require('./utility/console');
 const question = require('./api/questions');
-const util = require('./utils');
+const util = require('./utility/utils');
 
 const configStore = new Configstore('jiraconfig');
 const spinner = util.spinner('Authenticating...');

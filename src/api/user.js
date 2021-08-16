@@ -2,7 +2,8 @@
  * User Related APIs
  *
  */
-const auth = require("../authentication");
+const auth = require('../authentication');
+
 module.exports = {
   /**
    * Returns a list of users that match the search string.
@@ -14,21 +15,24 @@ module.exports = {
    * @param {string} opts.username The username
    * @param {string} opts.issueKey The issue key for the issue being edited we need to find assignable users
    */
-  searchAssignableUser: function(issueKey, input, cb) {
-    let options = { issueKey: issueKey, username: input };
-    auth.currentUser().user.searchAssignable(options, function(err, res) {
-      let users = [];
-      if (err) {
-        // if err then return the empty users array
-        return cb(users);
-      }
-      if (res) {
-        res.map(user => {
-          users.push({ accountId: user.accountId, name: user.displayName });
-        });
+  // searchAssignableUser: function(issueKey, input, cb) {
+  //   let options = { issueKey: issueKey, username: input };
+  //   auth.currentUser().user.searchAssignable(options, function(err, res) {
+  //     let users = [];
+  //     if (err) {
+  //       // if err then return the empty users array
+  //       return cb(users);
+  //     }
+  //     if (res) {
+  //       res.map(user => {
+  //         users.push({
+  //           accountId: user.accountId,
+  //           name: user.displayName
+  //         });
+  //       });
 
-        return cb(users);
-      }
-    });
-  }
+  //       return cb(users);
+  //     }
+  //   });
+  // }
 };

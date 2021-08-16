@@ -3,7 +3,9 @@
  * mostly used in opening URL with some base and secondary value.
  */
 const open = require('open');
-const util = require('./utils');
+const util = require('./utility/utils');
+
+const BOARD_URL = `${util.getBaseUrl()}/secure/RapidBoard.jspa?rapidView=`;
 
 /**
  * Opens the given URL
@@ -14,11 +16,8 @@ exports.openURL = async (url) => {
 };
 
 /**
- * Opens board with given boardId
+ * @return {string} boardURL
  * https://yourcompany.atlassian.net/secure/RapidBoard.jspa?rapidView=${boardId}
  * @param {*} brandId
  */
-exports.openBoardURL = (boardId) => {
-  const url = `${util.getBaseUrl()}?rapidView=${boardId}`;
-  this.openURL(url);
-};
+exports.boardURL = (boardId, accountId = null) => (accountId ? `${BOARD_URL}${boardId}&assignee=${accountId}` : `${BOARD_URL}${boardId}`);
