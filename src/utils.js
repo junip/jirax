@@ -1,55 +1,65 @@
 /**
  * Utils for the common funcional Usages
  */
-const Configstore = require("configstore");
-const jiraconfig = new Configstore("jiraconfig");
-const datetimeformat = require("dateformat");
-const consoleApi = require("./api/console");
-const ora = require("ora");
+const datetimeformat = require('dateformat');
+const ora = require('ora');
+const Configstore = require('configstore');
 
+// apis
+const consoleApi = require('./api/console');
+
+const jiraconfig = new Configstore('jiraconfig');
 module.exports = {
-  getBaseUrl: function() {
-    let hostname = jiraconfig.get("hostname");
-    let url = `https://${hostname}`;
+  /**
+   * @returns `https://yourcompanyjira.net`
+   */
+  getBaseUrl() {
+    const hostname = jiraconfig.get('hostname');
+    const url = `https://${hostname}`;
     return url;
   },
 
-  getHostName: function() {
-    let hostname = jiraconfig.get("hostname");
+  /**
+   * @returns `yourcompanyjira.net`
+   */
+  getHostName() {
+    const hostname = jiraconfig.get('hostname');
     return hostname;
   },
 
-  getEncodedString: function() {
-    let encodedString64 = jiraconfig.get("encodedString");
+  getEncodedString() {
+    const encodedString64 = jiraconfig.get('');
     return encodedString64;
   },
+
   /**
    * @returns Date & Time
    * @format 10/May/19 12:11 PM
    * @param {*} datetime
    */
-  formatDate: function(datetime) {
-    return datetimeformat(datetime, "dd/mmmm/yy, h:MM TT");
+  formatDate(datetime) {
+    return datetimeformat(datetime, '');
   },
+
   /**
    * Retruns the bgcolor for text on basis of issueType
    * @param {} key issueType
    */
-  setIssueColor: function(key) {
+  setIssueColor(key) {
     switch (key) {
-      case "Bug":
+      case 'Bug':
         return consoleApi.bgRedBright(key);
-      case "Improvement":
+      case 'Improvement':
         return consoleApi.printBgGreenBright(key);
-      case "New Feature":
+      case 'New Feature':
         return consoleApi.printBgGreenBright(key);
-      case "Epic":
+      case 'Epic':
         return consoleApi.bgMagentaBright(key);
-      case "Story":
+      case 'Story':
         return consoleApi.printBgGreenBright(key);
-      case "Sub-task":
+      case 'Sub-task':
         return consoleApi.printbgBlueBright(key);
-      case "Task":
+      case 'Task':
         return consoleApi.printbgBlueBright(key);
       default:
         return consoleApi.printbgBlueBright(key);
@@ -61,20 +71,18 @@ module.exports = {
    * @param {*} options
    */
   spinner(options) {
-    if (typeof options === "string") {
-      options = {
-        text: options
-      };
+    let modifiedOptions;
+    if (typeof options === 'string') {
+      modifiedOptions = { text: options };
+    } else {
+      modifiedOptions = options;
     }
-    let spinnerParams = Object.assign(
-      {
-        text: "",
-        color: "blue",
-        spinner: "point"
-      },
-      options
-    );
-
+    const spinnerParams = {
+      ...modifiedOptions,
+      text: '""',
+      color: 'blue',
+      spinner: 'point',
+    };
     return ora(spinnerParams);
-  }
+  },
 };
