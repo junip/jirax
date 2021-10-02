@@ -4,29 +4,29 @@
  * when user opted to remove the credentials
  */
 
-const Configstore = require('configstore');
+const Configstore = require("configstore");
 // apis
-const jira = require('./authentication');
-const print = require('./utility/console');
-const question = require('./api/questions');
-const util = require('./utility/utils');
+const jira = require("./authentication");
+const print = require("./utility/console");
+const question = require("./api/questions");
+const util = require("./utility/utils");
 
-const configStore = new Configstore('jiraconfig');
-const spinner = util.spinner('Authenticating...');
+const configStore = new Configstore("jiraconfig");
+const spinner = util.spinner("Authenticating...");
 /**
  * Verify the user and save the object
  * @config object
  */
 module.exports = {
   signUpUser: () => {
-    const isLoggedIn = configStore.get('encodedString');
+    const isLoggedIn = configStore.get("apiToken");
     if (!isLoggedIn) {
       question.askCredential().then((answers) => {
         spinner.start();
         module.exports.verifyAndSave(answers);
       });
     } else {
-      print.printInfo('You are already logged in');
+      print.printInfo("You are already logged in");
     }
   },
 
@@ -37,7 +37,7 @@ module.exports = {
         spinner.stop();
       }
       if (data.error) {
-        print.printError('Unauthorized - Please re-enter your credentials');
+        print.printError("Unauthorized - Please re-enter your credentials");
       } else {
         module.exports.storeInfo(data);
       }
@@ -48,19 +48,22 @@ module.exports = {
    * @param {*} data
    */
   storeInfo: (data) => {
-    const message = data.success.displayName.split(' ')[0];
+    const message = data.user.displayName.split(" ")[0];
     print.printFigletYellow(`Hi ${message}`);
     // saving the data
-    const { hostname, encodedString, success } = data;
-    const { accountId, username } = success;
+    const { hostname, user, apiToken, url } = data;
+    const { accountId, timeZone, displayName, emailAddress } = user;
 
     configStore.set({
       hostname,
-      encodedString,
+      timeZone,
       accountId,
-      username,
+      displayName,
+      apiToken,
+      url,
+      emailAddress,
     });
-    print.printInfo('You have Logged in Successfully  🍺🎉🎊🚀');
+    print.printInfo("You have Logged in Successfully  🍺🎉🎊🚀");
   },
 
   /**
@@ -74,10 +77,10 @@ module.exports = {
    */
   removeCredentials: () => {
     question.confirmRemoval().then((answers) => {
-      if (answers.remove === 'Yes') {
+      if (answers.remove === "Yes") {
         configStore.clear();
-        print.printInfo('You Have Successfully removed the login credentials.');
-        print.printInfo('Use command jirax login for login');
+        print.printInfo("You Have Successfully removed the login credentials.");
+        print.printInfo("Use `jirax --login` command for login");
       }
     });
   },

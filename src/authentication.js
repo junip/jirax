@@ -5,42 +5,9 @@
  * on the base of the main object.
  */
 
-const jiraConnector = require('jira-connector');
-const Configstore = require('configstore');
-const encode = require('./encode');
-const util = require('./utility/utils');
-
-const configStore = new Configstore('jiraconfig');
-const { Version2Client } = require('jira.js');
-
-// const jiraConfig = {
-//   host: 'technine.atlassian.net',
-//   telemetry: false, // Telemetry will not be collected
-//   authentication: {
-//     basic: {
-//       email: 'junip.dewan@tech9.com',
-//       apiToken: 'r3o2a02m1w0tafinlPny5F3B',
-//     },
-//   },
-// };
-
-// const client = new Version2Client({
-//   host: 'https://technine.atlassian.net',
-//   // Telemetry will not be collected
-//   authentication: {
-//     basic: {
-//       email: 'junip.dewan@tech9.com',
-//       apiToken: 'r3o2a02m1w0tafinlPny5F3B',
-//     },
-//   },
-// })
-
-// async function main() {
-//   const projects = await client.userSearch.findAssignableUsers()
-//   console.log(projects);
-// }
-
-// main()
+const Configstore = require("configstore");
+const configStore = new Configstore("jiraconfig");
+const { Version2Client } = require("jira.js");
 
 module.exports = {
   /**
@@ -49,45 +16,53 @@ module.exports = {
    */
   authenticate(config, callback) {
     const HOST_NAME = config.host_name;
-    const encodedString64 = encode.encodeToBase64(config);
-
-    // JIRA BASE OBJECT
-    const JIRA_AUTH = new jiraConnector({
-      host: HOST_NAME,
-      basic_auth: {
-        base64: encodedString64,
+    let client = new Version2Client({
+      host: `https://${config.host_name}`,
+      authentication: {
+        basic: {
+          email: config.user_name,
+          apiToken: config.api_token,
+        },
       },
     });
 
-    JIRA_AUTH.myself.getMyself({}, (error, success) => {
-      if (success) {
-        return callback({
-          success,
-          hostname: HOST_NAME,
-          encodedString: encodedString64,
-        });
-      }
-      return callback({ error: 'UnAuthorized' });
-    });
+    client.myself
+      .getCurrentUser()
+      .then((user) => {
+        if (user) {
+          return callback({
+            user,
+            url: `https://${config.host_name}`,
+            hostname: HOST_NAME,
+            apiToken: config.api_token,
+          });
+        }
+      })
+      .catch((err) => {
+        return callback({ error: "UnAuthorized" });
+      });
   },
+
   /**
    * Returns the recently authenticated user JIRA-Connector Object
    */
-  currentUser() {
-    const HOST_NAME = util.getHostName();
-    const encodedString64 = util.getEncodedString();
-
-    if (!HOST_NAME) {
-      console.log('Please login using your API Token');
+  jiraConfig() {
+    const emailAddress = configStore.get("emailAddress");
+    const apiToken = configStore.get("apiToken");
+    const hostUrl = configStore.get("url");
+    if (!apiToken) {
+      console.log("Please login using your API Token");
     } else {
-      const JIRA_AUTH = new jiraConnector({
-        host: HOST_NAME,
-        basic_auth: {
-          base64: encodedString64,
+      const JIRA_CONFIG = new Version2Client({
+        host: hostUrl,
+        authentication: {
+          basic: {
+            email: emailAddress,
+            apiToken: apiToken,
+          },
         },
       });
-
-      return JIRA_AUTH;
+      return JIRA_CONFIG;
     }
   },
 };
