@@ -4,15 +4,14 @@
  */
 const open = require('open');
 const util = require('./utility/utils');
-
 const BOARD_URL = `${util.getBaseUrl()}/secure/RapidBoard.jspa?rapidView=`;
 
 /**
  * Opens the given URL
  * @param {*} url
  */
-exports.openURL = async (url) => {
-  await open(url);
+exports.openURL = async url => {
+    await open(url);
 };
 
 /**
@@ -20,4 +19,7 @@ exports.openURL = async (url) => {
  * https://yourcompany.atlassian.net/secure/RapidBoard.jspa?rapidView=${boardId}
  * @param {*} brandId
  */
-exports.boardURL = (boardId, accountId = null) => (accountId ? `${BOARD_URL}${boardId}&assignee=${accountId}` : `${BOARD_URL}${boardId}`);
+exports.boardURL = (boardId, accountId = null) =>
+    accountId
+        ? `${BOARD_URL}${boardId}&assignee=${accountId}`
+        : `${BOARD_URL}${boardId}`;
