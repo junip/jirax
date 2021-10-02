@@ -10,16 +10,16 @@ program
     .command('login')
     .description('Login using JIRA API Token')
     .action(() => {
-      input.signUpUser();
+        input.signUpUser();
     });
 
 program
     .command('logout')
     .description('Remove you JIRA credentials')
     .action(() => {
-      input.removeCredentials();
-    });    
+        input.removeCredentials();
+    });
 
 // Add other sub commands here
-loadBoardCommands()
-program.parse(process.argv)
+loadBoardCommands();
+program.parse(process.argv);
