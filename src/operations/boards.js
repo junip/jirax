@@ -1,4 +1,4 @@
-const { openURL, boardURL } = require('../url');
+const { openURL, boardURL } = require('../Url');
 const config = require('../utility/utils');
 const print = require('../utility/console');
 

@@ -1,7 +1,7 @@
 /**
  * JIRA Apis response with jira JQL custom quesry search
  */
-const authenticate = require('../authentication');
+const authenticate = require('../services/AuthServices');
 const util = require('../utility/utils');
 const consoleApi = require('../utility/console');
 
@@ -21,7 +21,7 @@ module.exports = {
             issues = response.issues.map(issue => ({
                 key: issue.key,
                 summary: issue.fields.summary,
-                type: issue.fields.issuetype.name
+                type: issue.fields.issuetype.name,
             }));
         }
         return issues;
@@ -113,5 +113,5 @@ module.exports = {
         module.exports.myCompletedIssues(projectKey, response => {
             module.exports.printIssues(response);
         });
-    }
+    },
 };

@@ -14,23 +14,26 @@ module.exports = {
      * @param {string} opts.query The username
      * @param {string} opts.issueKey The issue key for the issue being edited we need to find assignable users
      */
-    searchAssignableUser: function(issueKey, input, cb) {
-      let options = { issueKey: issueKey, query: input };
-      auth.jira().userSearch.findAssignableUsers(options, function(err, res) {
-        let users = [];
-        if (err) {
-          // if err then return the empty users array
-          return cb(users);
-        }
-        if (res) {
-          res.map(user => {
-            users.push({
-              accountId: user.accountId,
-              name: user.displayName
-            });
-          });
-          return cb(users);
-        }
-      });
-    }
+    searchAssignableUser: function (issueKey, input, cb) {
+        let options = { issueKey: issueKey, query: input };
+        auth.jira().userSearch.findAssignableUsers(
+            options,
+            function (err, res) {
+                let users = [];
+                if (err) {
+                    // if err then return the empty users array
+                    return cb(users);
+                }
+                if (res) {
+                    res.map(user => {
+                        users.push({
+                            accountId: user.accountId,
+                            name: user.displayName,
+                        });
+                    });
+                    return cb(users);
+                }
+            }
+        );
+    },
 };

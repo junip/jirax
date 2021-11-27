@@ -9,9 +9,8 @@ const configStore = new Configstore('jiraconfig');
 // apis
 const authService = require('./services/AuthServices');
 const print = require('./utility/console');
-const question = require('./api/questions');
+const question = require('./api/Questions');
 const util = require('./utility/utils');
-
 
 const spinner = util.spinner('Authenticating...');
 /**
@@ -64,7 +63,7 @@ module.exports = {
             displayName,
             apiToken,
             url,
-            emailAddress
+            emailAddress,
         });
         print.printInfo('You have Logged in Successfully  🍺🎉🎊🚀');
     },
@@ -88,5 +87,5 @@ module.exports = {
                 print.printInfo('Use `jirax --login` command for login');
             }
         });
-    }
+    },
 };

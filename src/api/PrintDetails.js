@@ -15,17 +15,11 @@ module.exports = {
         console.log(`## Summary: ${issue.summary}\n`);
 
         console.log(
-            `## ${issue.key}                        Status: ${
-                issue.status
-            }                    ## Assignee - ${issue.assigneeName} \n`
+            `## ${issue.key}                        Status: ${issue.status}                    ## Assignee - ${issue.assigneeName} \n`
         );
 
         console.log(
-            `## Type: ${
-                issue.issueType
-            }                                                       ## Reporter - ${
-                issue.reporterName
-            } \n`
+            `## Type: ${issue.issueType}                                                       ## Reporter - ${issue.reporterName} \n`
         );
 
         console.log(
@@ -79,9 +73,9 @@ module.exports = {
                 priority: response.fields.priority.name,
                 created: response.fields.created,
                 updated: response.fields.updated,
-                resolved: response.fields.resolved
+                resolved: response.fields.resolved,
             };
             module.exports.printInConsole(issueObject);
         });
-    }
+    },
 };

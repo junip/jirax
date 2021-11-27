@@ -39,5 +39,5 @@ module.exports = {
 
     printbgCyan: message => chalk.black.bgCyan.bold(`${message}`),
 
-    printbgBlueBright: message => chalk.white.bgBlueBright.bold(`${message}`)
+    printbgBlueBright: message => chalk.white.bgBlueBright.bold(`${message}`),
 };

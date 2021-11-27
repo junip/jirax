@@ -1,14 +1,14 @@
 /**
- * Search user autocompleted and find the user
+ * Operations for searching user with autocomplete and find user
+ *
  */
-
 const inquirer = require('inquirer');
 const autocompletePrompt = require('inquirer-autocomplete-prompt');
 
 inquirer.registerPrompt('autocomplete', autocompletePrompt);
 const fuzzy = require('fuzzy');
-const user = require('./api/user');
-const issue = require('./api/issue_client');
+const user = require('../api/User');
+const issue = require('../api/IssueApis');
 
 let issueKey;
 let fetchedUsersArray;
@@ -27,8 +27,8 @@ module.exports = {
                     name: 'name',
                     message: 'Please search for the user to assign',
                     source: module.exports.searchUsers,
-                    pageSize: 5
-                }
+                    pageSize: 5,
+                },
             ])
             .then(answers => {
                 // assign the issue to selected user
@@ -70,7 +70,7 @@ module.exports = {
              */
             extract(el) {
                 return el.name;
-            }
+            },
         };
         const fuzzyResult = fuzzy.filter(username, fetchedUsersArray, options);
         /**
@@ -78,10 +78,6 @@ module.exports = {
          */
         const accountId = fuzzyResult.map(el => el.original.accountId);
 
-        /**
-         * finally assign the issue to the selected user expected format.
-         * { }
-         */
-        issue.assignIssue(issueKey, accountId[0], username);
-    }
+        //issue.assignIssue(issueKey, accountId[0], username);
+    },
 };

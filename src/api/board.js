@@ -7,7 +7,6 @@ const inquirer = require('inquirer');
 const autocompletePrompt = require('inquirer-autocomplete-prompt');
 const authService = require('../services/AuthServices');
 inquirer.registerPrompt('autocomplete', autocompletePrompt);
-const store = require('../store');
 const log = require('../utility/console');
 const util = require('../utility/utils');
 const spinner = util.spinner('Fetching boards.....');
@@ -28,8 +27,8 @@ module.exports = {
                             message:
                                 'Please search for the board you want to open',
                             source: module.exports.searchProjects,
-                            pageSize: 6
-                        }
+                            pageSize: 6,
+                        },
                     ])
                     .then(answers => {
                         // assign the issue to selected user
@@ -55,5 +54,5 @@ module.exports = {
                 resolve(fuzzyResult.map(el => el.original));
             }, 300);
         });
-    }
+    },
 };

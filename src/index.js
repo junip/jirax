@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const input = require('./store');
+const input = require('./Store');
 
-const { loadBoardCommands } = require('./commands/boards');
-const { loadTasksCommands } = require('./commands/tasks')
+const { loadBoardCommands } = require('./commands/Boards');
+const { loadTasksCommands } = require('./commands/Tasks');
 
 program.version('1.0.0').description('CLI Tool for accessing JIRA');
 program
