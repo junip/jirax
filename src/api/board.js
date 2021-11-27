@@ -5,7 +5,7 @@
 const fuzzy = require('fuzzy');
 const inquirer = require('inquirer');
 const autocompletePrompt = require('inquirer-autocomplete-prompt');
-const authenticate = require('../authentication');
+const authService = require('../services/AuthServices');
 inquirer.registerPrompt('autocomplete', autocompletePrompt);
 const store = require('../store');
 const log = require('../utility/console');
@@ -16,7 +16,7 @@ let names = [];
 module.exports = {
     getBoards() {
         spinner.start();
-        authenticate.jiraConnector().board.getAllBoards({}, (err, response) => {
+        authService.jiraConnector().board.getAllBoards({}, (err, response) => {
             if (response) {
                 spinner.stop();
                 names = response.values.map(el => el.name);

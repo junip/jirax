@@ -5,13 +5,14 @@
  */
 
 const Configstore = require('configstore');
+const configStore = new Configstore('jiraconfig');
 // apis
-const jira = require('./authentication');
+const authService = require('./services/AuthServices');
 const print = require('./utility/console');
 const question = require('./api/questions');
 const util = require('./utility/utils');
 
-const configStore = new Configstore('jiraconfig');
+
 const spinner = util.spinner('Authenticating...');
 /**
  * Verify the user and save the object
@@ -32,7 +33,7 @@ module.exports = {
 
     verifyAndSave: config => {
         // authenticate and save the inputs in config store
-        jira.authenticate(config, data => {
+        authService.authenticate(config, data => {
             if (data) {
                 spinner.stop();
             }

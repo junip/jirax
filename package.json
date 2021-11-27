@@ -45,6 +45,7 @@
     "assets": "./node_modules/figlet/fonts/Standard.flf"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "chalk": "^2.4.2",
     "commander": "^8.2.0",
     "configstore": "^4.0.0",
@@ -54,7 +55,7 @@
     "inquirer": "^6.3.1",
     "inquirer-autocomplete-prompt": "^1.4.0",
     "jira-connector": "^3.1.0",
-    "jira.js": "^2.5.1",
+    "jira.js": "^2.8.0",
     "log-update": "^3.2.0",
     "minimist": "^1.2.0",
     "open": "^8.2.1",

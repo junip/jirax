@@ -4,6 +4,7 @@ const program = require('commander');
 const input = require('./store');
 
 const { loadBoardCommands } = require('./commands/boards');
+const { loadTasksCommands } = require('./commands/tasks')
 
 program.version('1.0.0').description('CLI Tool for accessing JIRA');
 program
@@ -22,4 +23,6 @@ program
 
 // Add other sub commands here
 loadBoardCommands();
+loadTasksCommands();
+
 program.parse(process.argv);
