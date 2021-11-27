@@ -13,6 +13,7 @@ const instance = axios.create({
     headers: {
       'Authorization':  `Basic ${encodeEmailToken}`,
       'Cache-Control': 'no-cache',
+      'Content-Type': "application/json"
     },  
 })
 

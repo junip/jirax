@@ -83,7 +83,8 @@
                  basic_auth: {
                      email: emailAddress,
                      api_token: apiToken
-                 }
+                 },
+                 strictSSL: true 
              });
              return jira;
          }
