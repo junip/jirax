@@ -12,7 +12,9 @@ const authService = require('../services/AuthServices');
 const store = require('../Store');
 const log = require('../utility/console');
 const util = require('../utility/utils');
+const print = require('../operations/PrintIIssue')
 const statusSpinner = util.spinner('Fetching available statuses.....');
+const fetchingIssueSpinner = util.spinner({ text: 'Loading details..', spinner: 'moon' });
 
 // Initialize
 module.exports = {
@@ -39,7 +41,7 @@ module.exports = {
                             type: 'autocomplete',
                             name: 'name',
                             message:
-                                'Please search for transitions you want to move',
+                                'Search & select for transition you want to move the task',
                             source: (answers, input) => {
                                 input = input || '';
                                 return new Promise(resolve => {
@@ -89,7 +91,6 @@ module.exports = {
             issueIdOrKey: issueKey, 
             transition: {id: parseInt(transition.value), name: transition.name}
         }
-        console.log("asd", params)
         authService.jira().issues.doTransition(params, (response) => {
             if(response) {
                 transspin.stop();
@@ -103,4 +104,16 @@ module.exports = {
             console.log("----", error.response)
         })
     },
+
+    fetchTaskDetails(issueKey) {
+        fetchingIssueSpinner.start()
+        authService.jira().issues.getIssue({issueIdOrKey: issueKey}).then((res) => {
+            if(res) {
+                fetchingIssueSpinner.stop()
+                print.printIssueDetails(res)    
+            }
+        }).catch(error => {
+            console.log(error.response.status)
+        })
+    }
 };

@@ -5,6 +5,7 @@
 const open = require('open');
 const util = require('./utility/utils');
 const BOARD_URL = `${util.getBaseUrl()}/secure/RapidBoard.jspa?rapidView=`;
+const ISSUE_URL = `${util.getBaseUrl()}/browse`
 
 /**
  * Opens the given URL
@@ -23,3 +24,15 @@ exports.boardURL = (boardId, accountId = null) =>
     accountId
         ? `${BOARD_URL}${boardId}&assignee=${accountId}`
         : `${BOARD_URL}${boardId}`;
+
+/**
+ * https://yourcompany.atlassian.net/browse/Key
+ * @param {*} issueKey 
+ * @returns 
+ */        
+exports.issueURL = (issueKey) => {
+    return `${ISSUE_URL}/${issueKey}`
+}        
+
+
+        
