@@ -99,8 +99,8 @@ module.exports = {
         const spinnerParams = {
             ...modifiedOptions,
             color: 'blue',
-            spinner: 'point',
+            spinner: 'point'
         };
         return ora(spinnerParams);
-    },
+    }
 };

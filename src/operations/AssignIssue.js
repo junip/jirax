@@ -27,8 +27,8 @@ module.exports = {
                     name: 'name',
                     message: 'Please search for the user to assign',
                     source: module.exports.searchUsers,
-                    pageSize: 5,
-                },
+                    pageSize: 5
+                }
             ])
             .then(answers => {
                 // assign the issue to selected user
@@ -70,7 +70,7 @@ module.exports = {
              */
             extract(el) {
                 return el.name;
-            },
+            }
         };
         const fuzzyResult = fuzzy.filter(username, fetchedUsersArray, options);
         /**
@@ -79,5 +79,5 @@ module.exports = {
         const accountId = fuzzyResult.map(el => el.original.accountId);
 
         //issue.assignIssue(issueKey, accountId[0], username);
-    },
+    }
 };

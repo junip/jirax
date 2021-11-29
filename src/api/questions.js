@@ -10,23 +10,21 @@ const credentialQuestion = [
         type: 'input',
         name: 'host_name',
         message: 'Your JIRA Host Name (eg: something.atlassian.net)',
-        validate: value => (value.length ? true : 'Please enter Host Name'),
+        validate: value => (value.length ? true : 'Please enter Host Name')
     },
     {
         type: 'input',
         name: 'user_name',
         message: 'Your JIRA User Name',
-        validate: value =>
-            value.length ? true : 'Please enter Jira User Name',
+        validate: value => (value.length ? true : 'Please enter Jira User Name')
     },
     {
         type: 'password',
         name: 'api_token',
         message: 'Your API Token',
         mask: '*',
-        validate: value =>
-            value.length ? true : 'Please Enter Your API Token',
-    },
+        validate: value => (value.length ? true : 'Please Enter Your API Token')
+    }
 ];
 
 module.exports = {
@@ -62,8 +60,8 @@ module.exports = {
                     'You need to login again for further usages of JIRAX',
                 choices: [
                     { key: 'Yes', value: 'Yes' },
-                    { key: 'No', value: 'No' },
-                ],
-            },
-        ]),
+                    { key: 'No', value: 'No' }
+                ]
+            }
+        ])
 };

@@ -24,9 +24,9 @@ module.exports = {
             authentication: {
                 basic: {
                     email: config.user_name,
-                    apiToken: config.api_token,
-                },
-            },
+                    apiToken: config.api_token
+                }
+            }
         });
 
         client.myself
@@ -37,7 +37,7 @@ module.exports = {
                         user,
                         url: `https://${config.host_name}`,
                         hostname: HOST_NAME,
-                        apiToken: config.api_token,
+                        apiToken: config.api_token
                     });
                 }
             })
@@ -62,9 +62,9 @@ module.exports = {
                 authentication: {
                     basic: {
                         email: emailAddress,
-                        apiToken: apiToken,
-                    },
-                },
+                        apiToken: apiToken
+                    }
+                }
             });
             return JIRA_CONFIG;
         }
@@ -82,11 +82,11 @@ module.exports = {
                 host: hostname,
                 basic_auth: {
                     email: emailAddress,
-                    api_token: apiToken,
+                    api_token: apiToken
                 },
-                strictSSL: true,
+                strictSSL: true
             });
             return jira;
         }
-    },
+    }
 };

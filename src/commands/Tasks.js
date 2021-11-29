@@ -7,7 +7,7 @@ const program = require('commander');
  * 4. jirax task assign KEY - Assign issue to another user in the same task
  */
 const task = require('../api/Task');
-const taskOperation = require('../operations/Task')
+const taskOperation = require('../operations/Task');
 const assignTask = require('../operations/AssignIssue');
 
 exports.loadTasksCommands = () => {
@@ -34,7 +34,7 @@ exports.loadTasksCommands = () => {
         .argument('<KEY>', 'Task KEY to view')
         .description('Details of the Task KEY')
         .action(key => {
-            task.fetchTaskDetails(key)
+            task.fetchTaskDetails(key);
         });
 
     // assign issue
@@ -45,13 +45,13 @@ exports.loadTasksCommands = () => {
         .action(key => {
             assignTask.searchUser(key);
         });
-     
+
     // open issue
     openTasksCommands
         .command('open')
         .argument('<KEY>', 'Task key to open in browser')
         .description('Opens issue in browser')
         .action(key => {
-            taskOperation.openTask(key)
-        });    
+            taskOperation.openTask(key);
+        });
 };

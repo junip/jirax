@@ -27,8 +27,8 @@ module.exports = {
                             message:
                                 'Please search for the board you want to open',
                             source: module.exports.searchProjects,
-                            pageSize: 6,
-                        },
+                            pageSize: 6
+                        }
                     ])
                     .then(answers => {
                         // assign the issue to selected user
@@ -54,5 +54,5 @@ module.exports = {
                 resolve(fuzzyResult.map(el => el.original));
             }, 300);
         });
-    },
+    }
 };

@@ -63,7 +63,7 @@ module.exports = {
             displayName,
             apiToken,
             url,
-            emailAddress,
+            emailAddress
         });
         print.printInfo('You have Logged in Successfully  🍺🎉🎊🚀');
     },
@@ -87,5 +87,5 @@ module.exports = {
                 print.printInfo('Use `jirax --login` command for login');
             }
         });
-    },
+    }
 };

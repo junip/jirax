@@ -21,7 +21,7 @@ module.exports = {
             issues = response.issues.map(issue => ({
                 key: issue.key,
                 summary: issue.fields.summary,
-                type: issue.fields.issuetype.name,
+                type: issue.fields.issuetype.name
             }));
         }
         return issues;
@@ -113,5 +113,5 @@ module.exports = {
         module.exports.myCompletedIssues(projectKey, response => {
             module.exports.printIssues(response);
         });
-    },
+    }
 };
