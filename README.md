@@ -16,7 +16,6 @@
 A CLI tool for [JIRA](`https://www.atlassian.com/software/jira`) for day to day usage with JIRA.Speed up your JIRA activity with this CLI tool.
 
 
-![Interface](assets/terminal.png?raw=true "CLI Help Preview")
 
 ## Prerequisites
 
@@ -95,70 +94,35 @@ $XDG_CONFIG_HOME or ~/.config.
 
 ## JIRAX Commands
 
+Jirax CLI tool is madeup with the subcommands for various jira activities.
+
 ```sh
 # prints all available commands
 jirax --help 
 ```
+<img src="./assets/preview.png"></img>
+<br/>
+#### For Subcommands options
 
-## Open the Issue directly in Browser
+```sh
+ # prints all available commands for a specific subcommand
+ jirax command --help
 
-![Interface](assets/open.png?raw=true "open command preview")
+```
+<img src="./assets/board_subcommands.png"></img>
 
-## Open issue details in CLI 
+<br/>
+<br/>
+<br/>
+<img src="./assets/task_subcommands.png"></img>
 
-![Interface](assets/details.png?raw=true "issue details command preview")
-
-## View all the issues in browser for a Project (i.e project Key)
-
-![Interface](assets/open_issues.png?raw=true "open issues command preview")
-
-
-## List of all TO DO issues 
-
-list of all todo issues for the logged in user. Here project key is optional and if project key is not provided then it will return all the open issues for the user
-
-![Interface](assets/completed_list.png?raw=true "open issues command preview")
-
-## List of Completed issues
-
-![Interface](assets/todo_list.png?raw=true "open issues command preview")
-
-
-## View all the issues in browser for a Project (i.e project Key)
-
-![Interface](assets/open_issues.png?raw=true "open issues command preview")
-
-
-
-
-## Transtion of issues (move issues from one status to another)
-
-
-![Interface](assets/move1.png?raw=true "move issues preview")
-
-![Interface](assets/move2.png?raw=true "move issues preview")
-
-## Assign issues to another user 
-
-![Interface](assets/assign_issues_1.png?raw=true "move issues preview")
-
-![Interface](assets/assign_issues_2.png?raw=true "move issues preview")
-
-## Self Assign an Issue
-
-![Interface](assets/assign_me.png?raw=true "move issues preview")
 
 ## Clear Stored Credentials
 In case of your API token revoked or you have revoked the previous API token then you need to clear the previous credentials using the following command and
 Relogin using command `jirax login`
 
-![Interface](assets/clear_1.png?raw=true "move issues preview")
-
-![Interface](assets/clear_2.png?raw=true "move issues preview")
-
-
-### Asciicast Preview
-[![asciicast](https://asciinema.org/a/251931.png)](https://asciinema.org/a/251931)
+<img src="./assets/clear_1.png"></img>
+<img src="./assets/clear_2.png"></img>
 
 ## Making executable
 

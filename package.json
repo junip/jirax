@@ -1,7 +1,7 @@
 {
   "name": "jirax",
   "version": "1.0.2",
-  "description": "A sample and flexible cli tool to handle JIRA activity",
+  "description": "A cli tool for daily JIRA activities",
   "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
   "bin": {
@@ -9,8 +9,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "build": "pkg ."
+    "format": "prettier --write \"src/**/*.js\"",
+    "build": "pkg .",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,12 @@
     "jira-cli",
     "jira-tool",
     "jira-cmd",
-    "cli",
-    "jira",
+    "jirajs",
+    "jira-in-terminal",
     "terminal",
     "console",
-    "shell",
-    "jirax-cli",
+    "jira-shell",
+    "jirax",
     "jira-cmd"
   ],
   "license": "MIT",
@@ -35,24 +36,29 @@
   },
   "homepage": "https://github.com/junipdewan/jirax#readme",
   "devDependencies": {
-    "prettier": "1.17.1"
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0",
+    "prettier": "^1.17.1"
   },
   "pkg": {
     "assets": "./node_modules/figlet/fonts/Standard.flf"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "chalk": "^2.4.2",
-    "commander": "^2.20.0",
+    "commander": "^8.2.0",
     "configstore": "^4.0.0",
     "dateformat": "^3.0.3",
     "figlet": "^1.2.1",
     "fuzzy": "^0.1.3",
     "inquirer": "^6.3.1",
-    "inquirer-autocomplete-prompt": "^1.0.1",
-    "jira-connector": "^2.14.0",
+    "inquirer-autocomplete-prompt": "^1.4.0",
+    "jira-connector": "^3.1.0",
+    "jira.js": "^2.8.0",
     "log-update": "^3.2.0",
     "minimist": "^1.2.0",
-    "open": "^6.3.0",
+    "open": "^8.2.1",
     "ora": "^3.4.0",
     "pkg": "^4.4.0"
   }
