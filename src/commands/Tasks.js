@@ -13,7 +13,7 @@ const assignTask = require('../operations/AssignIssue');
 exports.loadTasksCommands = () => {
     const openTasksCommands = program
         .command('task')
-        .description('jira task actions')
+        .description('JIRA task operations')
         .action(() => {
             // show the available issues commands
             openTasksCommands.help();
@@ -23,7 +23,7 @@ exports.loadTasksCommands = () => {
     openTasksCommands
         .command('change')
         .argument('<KEY>', 'Task KEY that you want to change')
-        .description('Change the status of the issue')
+        .description('Change the status of the task')
         .action(key => {
             task.changeIssueStatus(key);
         });
@@ -32,7 +32,7 @@ exports.loadTasksCommands = () => {
     openTasksCommands
         .command('details')
         .argument('<KEY>', 'Task KEY to view')
-        .description('Details of the Task KEY')
+        .description('Details of the Task')
         .action(key => {
             task.fetchTaskDetails(key);
         });
@@ -41,7 +41,7 @@ exports.loadTasksCommands = () => {
     openTasksCommands
         .command('assign')
         .argument('<KEY>', 'Task key that to assign')
-        .description('Assign issue to another user')
+        .description('Assign task to another user')
         .action(key => {
             assignTask.searchUser(key);
         });
@@ -50,7 +50,7 @@ exports.loadTasksCommands = () => {
     openTasksCommands
         .command('open')
         .argument('<KEY>', 'Task key to open in browser')
-        .description('Opens issue in browser')
+        .description('Opens task in browser')
         .action(key => {
             taskOperation.openTask(key);
         });

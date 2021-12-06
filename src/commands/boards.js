@@ -13,7 +13,7 @@ const board = require('../api/board');
 exports.loadBoardCommands = () => {
     const openBoardCommand = program
         .command('board')
-        .description('jira board activity')
+        .description('JIRA boards activities')
         .action(() => {
             openBoardCommand.help();
         });

@@ -5,7 +5,23 @@
 const consoleApi = require('../utility/console');
 
 module.exports = {
-    printInConsole(issue) {
+    /**
+     * Print the issue details
+     * @param {issueKey: 'SFMAC-165'}
+     */
+    printIssueDetails(response) {
+        
+        let issue = {
+            key: response.key,
+            description: response.fields.description,
+            reporterName: response.fields.reporter.displayName,
+            assigneeName: response.fields.assignee.displayName,
+            summary: response.fields.summary,
+            status: response.fields.status.name,
+            issueType: response.fields.issuetype.name,
+            priority: response.fields.priority.name
+        };
+
         consoleApi.printInfo(`Details for ${issue.key}\n`);
 
         console.log(
@@ -33,24 +49,5 @@ module.exports = {
         );
         console.log(`## ${consoleApi.printbgBlueBright('Description')} \n`);
         console.log(`${issue.description}\n`);
-    },
-
-    /**
-     * Print the issue details
-     * @param {issueKey: 'SFMAC-165'}
-     */
-    printIssueDetails(response) {
-        issueObject = {
-            key: response.key,
-            description: response.fields.description,
-            reporterName: response.fields.reporter.displayName,
-            assigneeName: response.fields.assignee.displayName,
-            summary: response.fields.summary,
-            status: response.fields.status.name,
-            issueType: response.fields.issuetype.name,
-            priority: response.fields.priority.name
-        };
-
-        module.exports.printInConsole(issueObject);
     }
 };

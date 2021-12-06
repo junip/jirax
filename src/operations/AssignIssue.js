@@ -78,6 +78,6 @@ module.exports = {
          */
         const accountId = fuzzyResult.map(el => el.original.accountId);
 
-        //issue.assignIssue(issueKey, accountId[0], username);
+        issue.assignIssue(issueKey, accountId[0], username);
     }
 };

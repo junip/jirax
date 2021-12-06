@@ -1,3 +1,7 @@
+/**
+ * we generally use JIRA_CONNECTOR and JIRA.js for various JIRA APIS access.
+ * For some cases we can use this service to call the API directly.
+ */
 const Configstore = require('configstore');
 const configStore = new Configstore('jiraconfig');
 const axios = require('axios');

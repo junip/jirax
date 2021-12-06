@@ -1,7 +1,7 @@
 {
   "name": "jirax",
   "version": "1.0.2",
-  "description": "A sample and flexible cli tool to handle JIRA activity",
+  "description": "A cli tool for daily JIRA activities",
   "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
   "bin": {
