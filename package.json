@@ -1,6 +1,6 @@
 {
   "name": "jirax",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A cli tool for daily JIRA activities",
   "author": "Junip Dewan <junipd2@gmail.com>",
   "main": "index.js",
