@@ -21,7 +21,7 @@ exports.loadTasksCommands = () => {
 
     // change status of the issue
     openTasksCommands
-        .command('change')
+        .command('move')
         .argument('<KEY>', 'Task KEY that you want to change')
         .description('Change the status of the task')
         .action(key => {

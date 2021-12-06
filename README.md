@@ -94,20 +94,35 @@ $XDG_CONFIG_HOME or ~/.config.
 
 ## JIRAX Commands
 
+Jirax CLI tool is madeup with the subcommands for various jira activities.
+
 ```sh
 # prints all available commands
 jirax --help 
 ```
+<img src="./assets/preview.png"></img>
+<br/>
+#### For Subcommands options
 
+```sh
+ # prints all available commands for a specific subcommand
+ jirax command --help
 
+```
+<img src="./assets/board_subcommands.png"></img>
 
+<br/>
+<br/>
+<br/>
+<img src="./assets/task_subcommands.png"></img>
 
 
 ## Clear Stored Credentials
 In case of your API token revoked or you have revoked the previous API token then you need to clear the previous credentials using the following command and
 Relogin using command `jirax login`
 
-
+<img src="./assets/clear_1.png"></img>
+<img src="./assets/clear_2.png"></img>
 
 ## Making executable
 
