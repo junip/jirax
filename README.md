@@ -121,11 +121,11 @@ jirax --help
 In case of your API token revoked or you have revoked the previous API token then you need to clear the previous credentials using the following command and
 Relogin using command `jirax login`
 
-<img src="./assets/clear_1.png"></img>
-<img src="./assets/clear_2.png"></img>
+```sh
+jirax logout
+```
 
 ## Making executable
-
 After cloning the repository. Run this command this command will automatically create plateform specific executables.
 
 ```sh
@@ -140,4 +140,4 @@ We hope that you will consider contributing to Jirax. Please read this short ove
 
 **jirax** is available under the **MIT license**. See the [LICENSE](https://github.com/junipdewan/jirax/blob/master/LICENSE) file for more info.
 
-Copyright (c) 2019 <junipd2@gmail.com>
+Copyright (c) 2021 <junipd2@gmail.com>

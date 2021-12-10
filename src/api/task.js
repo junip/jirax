@@ -22,7 +22,6 @@ const fetchingIssueSpinner = util.spinner({
 // Initialize
 module.exports = {
     changeIssueStatus(issueKey) {
-        let api = '/rest/api/2/issue/' + issueKey;
         statusSpinner.start();
 
         authService
@@ -104,7 +103,10 @@ module.exports = {
                     log.printInfo('Your issue changed to ' + transition.name);
                 }
             })
-            .then(response => {})
+            .then(response => {
+                transspin.stop();
+                log.printInfo('Your issue changed to ' + transition.name);
+            })
             .catch(error => {
                 console.log('----', error.response);
             });

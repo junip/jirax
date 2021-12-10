@@ -48,10 +48,20 @@ exports.loadTasksCommands = () => {
 
     // open issue
     openTasksCommands
+        .command('assign-me')
+        .argument('<KEY>', 'Task key to assign')
+        .description('Assign Issue to Self(logged in user')
+        .action(key => {
+            taskOperation.assignToSelf(key)
+        }); 
+
+    // open issue
+    openTasksCommands
         .command('open')
         .argument('<KEY>', 'Task key to open in browser')
         .description('Opens task in browser')
         .action(key => {
             taskOperation.openTask(key);
         });
+       
 };
